@@ -31,7 +31,7 @@ function StockChart(props) {
         textColor,
       },
       width: 700,
-      height: 400,
+      height: 500,
       grid: {
         vertLines: { visible: false },
         horzLines: { visible: false },

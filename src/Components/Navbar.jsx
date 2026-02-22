@@ -1,7 +1,7 @@
 import { CircleDollarSign } from "lucide-react";
 function Navbar() {
   return (
-    <header className="p-6 mb-24">
+    <header className="p-6 mb-18">
       <nav className="flex justify-between items-center font-sans border-2 border-zinc-800 p-2 rounded-2xl">
         <div className="w-50 flex items-center gap-3">
           <CircleDollarSign size={64} className="bg-bg-page fill-accent" />
