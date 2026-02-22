@@ -1,9 +1,10 @@
+import StockChart from "./Charts/LightWeightCharts";
 import HeroChart from "./HeroCharts";
-function Hero() {
+function Hero({ props, initialData, data }) {
   // function TypewriterEffectDemo() {
 
   return (
-    <div className="flex max-w-7xl mx-auto gap-4 items-center">
+    <div className="flex max-w-[1360px] mx-auto gap-4 items-center">
       <section className="relative max-w-7xl mx-auto flex-col gap-4 py-24">
         {/* Glow 1 - behind headline */}
         <div
@@ -90,8 +91,8 @@ function Hero() {
         </div>*/}
       </section>
       {/* Right side - chart */}
-      <div className="flex-1">
-        <HeroChart />
+      <div className="flex-1 rounded-2xl border-2 border-accent shadow-[0_5px_30px_rgba(16,185,129,0.4)] p-1">
+        <StockChart {...props} data={data} />
       </div>
     </div>
   );
