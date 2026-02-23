@@ -45,3 +45,30 @@
     padding: 0;
     box-sizing: border-box;
 }*/
+
+@theme {
+    --animate-tickerLeft: tickerLeft 20s linear infinite;
+    --animate-tickerRight: tickerRight 20s linear infinite;
+
+    @keyframes tickerLeft {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+    @keyframes tickerRight {
+        0% {
+            transform: translateX(-50%);
+        }
+        100% {
+            transform: translateX(0%);
+        }
+    }
+}
+
+.ticker:hover {
+    animation-play-state: paused;
+}

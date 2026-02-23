@@ -6,6 +6,7 @@ import FeaturesList from "./Components/FeaturesList";
 import { useEffect } from "react";
 import { useState } from "react";
 import Features from "./Components/Features";
+import Testimonails from "./Components/Testimonials";
 
 // const apiKey = "d6dcmb1r01qgk7mlfdm0d6dcmb1r01qgk7mlfdmg";
 const apiKey = "nwzfb_5OVbQO1cH5UpqpNgB5VJlE0E9G";
@@ -94,12 +95,13 @@ function App(props) {
   // }, []);
 
   return (
-    <div className=" min-h-screen bg-bg-page">
+    <div className=" min-h-screen bg-bg-page p-6 ">
       <Navbar />
       <Hero initialData={initialData} props={props} data={initialData} />
       {/* <StockChart {...props} data={dataArr} />*/}
       {/* <FeaturesList />*/}
       <Features />
+      <Testimonails />
     </div>
   );
 }
