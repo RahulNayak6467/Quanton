@@ -17,25 +17,39 @@ function Features() {
           smart alerts, and deep market insights, all in one clean dashboard.
         </p>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 mb-4 grow">
-        {features.slice(0, 3).map((f) => (
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-4 grow">
+        {features.slice(0, 2).map((f) => (
           <FeaturesList
             icon={f.icon}
             title={f.title}
             description={f.description}
             stats={f.stat}
             key={f.id}
+            image={f.image}
           />
         ))}
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-        {features.slice(3, 5).map((f) => (
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-4">
+        {features.slice(2, 4).map((f) => (
           <FeaturesList
             icon={f.icon}
             title={f.title}
             description={f.description}
             stats={f.stat}
             key={f.id}
+            image={f.image}
+          />
+        ))}
+      </div>
+      <div className="grid grid-cols-2 gap-5">
+        {features.slice(4, 5).map((f) => (
+          <FeaturesList
+            icon={f.icon}
+            title={f.title}
+            description={f.description}
+            stats={f.stat}
+            key={f.id}
+            image={f.image}
           />
         ))}
       </div>

@@ -12,6 +12,7 @@ export const features = [
     description:
       "Monitor live prices across thousands of stocks the moment they move. Never miss a market shift.",
     stat: "10,000+ stocks tracked",
+    image: "/Images/TradingGraph.png",
   },
   {
     id: 2,
@@ -25,6 +26,7 @@ export const features = [
     description:
       "Set custom price alerts for any stock. Get notified instantly when your conditions are met.",
     stat: "Instant notifications",
+    image: "/Images/NewsAlert.png",
   },
   {
     id: 3,
@@ -38,6 +40,7 @@ export const features = [
     description:
       "Build and manage a personal watchlist of stocks you care about. All in one clean dashboard.",
     stat: "Unlimited stocks",
+    image: "/Images/WatchList.png",
   },
   {
     id: 4,
@@ -51,6 +54,7 @@ export const features = [
     description:
       "Access analyst recommendations, key fundamentals, and the latest news for any stock.",
     stat: "Deep market data",
+    image: "/Images/MarketInsights.png",
   },
   {
     id: 5,
@@ -64,5 +68,6 @@ export const features = [
     description:
       "Discover the biggest gainers and losers every day.Spot opportunities before the crowd does.",
     stat: "Updated every minute",
+    image: "/Images/TopMovers.png",
   },
 ];
