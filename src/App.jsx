@@ -7,7 +7,11 @@ import { useEffect } from "react";
 import { useState } from "react";
 import Features from "./Components/Features";
 import Testimonails from "./Components/Testimonials";
-
+import HowItWorks from "./Components/HowItWorks";
+import HowIt from "./Components/HowIt";
+import CTA from "./Components/CTA";
+import { RetroGrid } from "./components/ui/retro-grid";
+import Footer from "./Components/Footer";
 // const apiKey = "d6dcmb1r01qgk7mlfdm0d6dcmb1r01qgk7mlfdmg";
 const apiKey = "nwzfb_5OVbQO1cH5UpqpNgB5VJlE0E9G";
 const generateData = () => {
@@ -95,13 +99,18 @@ function App(props) {
   // }, []);
 
   return (
-    <div className=" min-h-screen bg-bg-page p-6 ">
+    <div className=" min-h-screen bg-bg-page p-6 overflow-x-hidden">
+      <RetroGrid />
       <Navbar />
       <Hero initialData={initialData} props={props} data={initialData} />
       {/* <StockChart {...props} data={dataArr} />*/}
       {/* <FeaturesList />*/}
       <Features />
       <Testimonails />
+      <HowItWorks />
+      <HowIt />
+      <CTA />
+      <Footer />
     </div>
   );
 }
