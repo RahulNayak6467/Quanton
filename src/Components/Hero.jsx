@@ -39,7 +39,7 @@ function Hero({ props, initialData, data }) {
         {/* Content */}
         <div className="relative z-1">
           {/* Badge */}
-          <div className="mb-6 inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#1E2D3D] bg-[#111827] text-sm text-text-secondary">
+          <div className="mb-6 inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#1E2D3D] bg-bg-card text-sm text-text-secondary">
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
             Live Market Data
           </div>

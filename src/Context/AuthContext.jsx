@@ -14,13 +14,13 @@ export const useAuth = () => {
 
 const AuthProvider = ({ children }) => {
   const [username, setUserName] = useState(null);
-  // const [isLoading, setIsloading] = useState(true);
+  const [isLoading, setIsloading] = useState(true);
 
   useEffect(() => {
     // Check session on load;
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUserName(session?.user ?? null);
-      // setIsloading(false);
+      setIsloading(false);
     });
 
     // Listen for auth changes
@@ -28,6 +28,7 @@ const AuthProvider = ({ children }) => {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event, session) => {
       setUserName(session?.user ?? null);
+      setIsloading(false);
     });
 
     return () => subscription.unsubscribe();
@@ -35,7 +36,7 @@ const AuthProvider = ({ children }) => {
 
   const value = {
     username,
-    // isLoading,
+    isLoading,
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

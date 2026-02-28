@@ -3,7 +3,7 @@ import FeaturesList from "./FeaturesList";
 
 function Features() {
   return (
-    <section className="max-w-[1320px] mx-auto mt-24 mb-24">
+    <section className="max-w-330 mx-auto mt-24 mb-24">
       <div className="text-center mb-12 p-6">
         {/* Heading */}
         <h2 className="text-5xl text-text-primary font-semibold mb-4">

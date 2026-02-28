@@ -13,7 +13,15 @@ export const useProtectedRoutes = () => {
 };
 
 const ProtectedRoutes = ({ children }) => {
-  const { username } = useAuth();
+  const { username, isLoading } = useAuth();
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-bg-page">
+        <p className="text-text-secondary">Loading...</p>
+      </div>
+    );
+  }
 
   if (!username) {
     return <Navigate to="/SignUp" />;

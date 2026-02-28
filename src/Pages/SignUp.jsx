@@ -7,6 +7,7 @@ import z from "zod";
 // import { email } from "zod/v4/core/regexes.cjs";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { supabase } from "@/Supabase-client/SupabaseClient";
+import { useNavigate } from "react-router-dom";
 
 const userSchema = z
   .object({
@@ -29,6 +30,7 @@ const userSchema = z
   );
 
 function SignUp() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -43,12 +45,40 @@ function SignUp() {
       email: userData.email,
       password: userData.password,
     };
-    const { data, error } = await supabase.auth.signUp(userInfo);
+    const { error } = await supabase.auth.signUp(userInfo);
     if (error) {
       console.log(error.message);
       return;
     }
-    console.log(data);
+    navigate("/dashboard");
+  };
+
+  const handleGoogleOAuth = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: "http://localhost:5173/dashboard",
+      },
+    });
+
+    if (error) {
+      console.error("An error occured");
+      return;
+    }
+  };
+
+  const handleGitHubOAuth = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "github",
+      options: {
+        redirectTo: "http://localhost:5173/dashboard",
+      },
+    });
+
+    if (error) {
+      console.error("An error occured");
+      return;
+    }
   };
 
   return (
@@ -157,6 +187,7 @@ function SignUp() {
               <div className="flex-1 h-[1px] bg-border" />
             </div>
             <button
+              onClick={() => handleGoogleOAuth()}
               type="button"
               className="w-full px-4 py-3 rounded-2xl bg-bg-card text-text-primary fontfont-extrabold flex items-center text-center mt-4 gap-3 border-2  border-zinc-400 justify-center cursor-pointer hover:bg-[#070B12]"
             >
@@ -168,6 +199,7 @@ function SignUp() {
               <p>Continue with Google</p>
             </button>
             <button
+              onClick={() => handleGitHubOAuth()}
               type="button"
               className="w-full px-4 py-3 rounded-2xl bg-bg-card text-text-primary fontfont-extrabold flex items-center text-center mt-4 gap-3 border-2  border-zinc-400 justify-center cursor-pointer hover:bg-[#070B12]"
             >
