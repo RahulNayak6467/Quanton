@@ -3,7 +3,6 @@ import Navbar from "./Components/Navbar";
 import Hero from "./Components/Hero";
 import StockChart from "./Components/Charts/LightWeightCharts";
 import FeaturesList from "./Components/FeaturesList";
-import { useEffect } from "react";
 import { useState } from "react";
 import Features from "./Components/Features";
 import Testimonails from "./Components/Testimonials";
@@ -12,6 +11,13 @@ import HowIt from "./Components/HowIt";
 import CTA from "./Components/CTA";
 import { RetroGrid } from "./components/ui/retro-grid";
 import Footer from "./Components/Footer";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import UnsignedUser from "./Pages/UnsignedUser";
+import LoginPage from "./Pages/LoginPage";
+import SignUp from "./Pages/SignUp";
+import Dashboard from "./Pages/Dashboard";
+import ProtectedRoutes from "./Context/ProtectedRoutes";
+import AuthProvider from "./Context/AuthContext";
 // const apiKey = "d6dcmb1r01qgk7mlfdm0d6dcmb1r01qgk7mlfdmg";
 const apiKey = "nwzfb_5OVbQO1cH5UpqpNgB5VJlE0E9G";
 const generateData = () => {
@@ -42,6 +48,28 @@ const initialData = generateData();
 function App(props) {
   const [dataArr, setDataArr] = useState([]);
 
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <UnsignedUser props={props} data={initialData} />,
+    },
+    {
+      path: "/SignUp",
+      element: <SignUp />,
+    },
+    {
+      path: "/Login",
+      element: <LoginPage />,
+    },
+    {
+      path: "/dashboard",
+      element: (
+        <ProtectedRoutes>
+          <Dashboard />
+        </ProtectedRoutes>
+      ),
+    },
+  ]);
   // useEffect(() => {
   //   const tickers = ["AAPL", "TSLA", "GOOGL", "AMZN", "MSFT", "NVDA", "META"];
   //   const fetchStocks = async () => {
@@ -99,18 +127,23 @@ function App(props) {
   // }, []);
 
   return (
-    <div className=" min-h-screen bg-bg-page p-6 overflow-x-hidden">
-      <RetroGrid />
-      <Navbar />
-      <Hero initialData={initialData} props={props} data={initialData} />
-      {/* <StockChart {...props} data={dataArr} />*/}
-      {/* <FeaturesList />*/}
-      <Features />
-      <Testimonails />
-      <HowItWorks />
-      <HowIt />
-      <CTA />
-      <Footer />
+    // <div className=" min-h-screen bg-bg-page p-6 overflow-x-hidden">
+    //   {/* <RetroGrid />
+    //   <Navbar />
+    //   <Hero initialData={initialData} props={props} data={initialData} />
+    //   {/* <StockChart {...props} data={dataArr} />*/}
+    //   {/* <FeaturesList />*/}
+    //   <Features />
+    //   <Testimonails />
+    //   <HowItWorks />
+    //   <HowIt />
+    //   <CTA />
+    //   <Footer />*/}
+    // </div>
+    <div className=" bg-bg-page">
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </div>
   );
 }

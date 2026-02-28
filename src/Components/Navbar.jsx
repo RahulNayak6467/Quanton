@@ -1,4 +1,5 @@
 import { CircleDollarSign } from "lucide-react";
+import { Link } from "react-router-dom";
 function Navbar() {
   return (
     <header className="p-6 mb-18">
@@ -22,12 +23,18 @@ function Navbar() {
         </div>
         <div className="w-50">
           <div className="flex gap-5">
-            <button className="px-4 py-1 cursor-pointer rounded-2xl bg-transparent  hover:bg-[#1A2332] text-[#F1F5F9] border-2 border-solid  border-[#1E2D3D]">
+            <Link
+              to="/Login"
+              className="px-4 py-1 cursor-pointer rounded-2xl bg-transparent  hover:bg-[#1A2332] text-[#F1F5F9] border-2 border-solid  border-[#1E2D3D]"
+            >
               Login
-            </button>
-            <button className="px-2 py-2 cursor-pointer rounded-2xl  bg-[#10B981] hover:bg-accent-hover text-white flex items-center">
+            </Link>
+            <Link
+              to="/SignUp"
+              className="px-2 py-2 cursor-pointer rounded-2xl  bg-[#10B981] hover:bg-accent-hover text-white flex items-center"
+            >
               Sign Up &#8594;
-            </button>
+            </Link>
           </div>
         </div>
       </nav>
