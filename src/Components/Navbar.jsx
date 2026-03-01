@@ -1,5 +1,6 @@
 import { CircleDollarSign } from "lucide-react";
 import { Link } from "react-router-dom";
+import NavMenu from "./NavMenu";
 function Navbar() {
   return (
     <header className="p-6 mb-18">
@@ -10,15 +11,9 @@ function Navbar() {
         </div>
         <div className="ml-4  py-1 px-4 ">
           <ul className="flex justify-between gap-15 text-xl text-text-primary">
-            <li className="cursor-pointer hover:text-accent hover:underline ">
-              Features
-            </li>
-            <li className="cursor-pointer hover:text-accent hover:underline">
-              How it Works
-            </li>
-            <li className="cursor-pointer hover:text-accent hover:underline">
-              Pricing
-            </li>
+            <NavMenu features={"Features"}></NavMenu>
+            <NavMenu features={"How it Works"}></NavMenu>
+            <NavMenu features={"Pricing"}></NavMenu>
           </ul>
         </div>
         <div className="w-50">

@@ -1,10 +1,5 @@
-import { Eye } from "lucide-react";
-import { EyeOff } from "lucide-react";
-import { useState } from "react";
-import { MagicCard } from "@/components/ui/magic-card";
 import { useForm } from "react-hook-form";
 import z from "zod";
-// import { email } from "zod/v4/core/regexes.cjs";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { supabase } from "@/Supabase-client/SupabaseClient";
 import { useNavigate } from "react-router-dom";

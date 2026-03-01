@@ -1,6 +1,5 @@
-import React, { forwardRef, useRef } from "react";
+import { forwardRef, useRef } from "react";
 import { cn } from "@/lib/utils";
-import { AnimatedBeam } from "@/components/ui/animated-beam";
 import { steps } from "@/Data/Steps";
 import HowItWorksList from "./HowItWorksList";
 
@@ -64,7 +63,7 @@ function HowItWorks() {
             </div>
           </div>
         </div>
-        <AnimatedBeam
+        {/* <AnimatedBeam
           duration={10}
           containerRef={containerRef}
           fromRef={div1Ref}
@@ -79,7 +78,7 @@ function HowItWorks() {
           toRef={div3Ref}
           gradientStartColor="#10b981"
           gradientStopColor="#10b981"
-        />
+        /> */}
       </div>
     </section>
   );

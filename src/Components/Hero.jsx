@@ -1,6 +1,6 @@
 import StockChart from "./Charts/LightWeightCharts";
-import HeroChart from "./HeroCharts";
-function Hero({ props, initialData, data }) {
+
+function Hero({ props, data }) {
   // function TypewriterEffectDemo() {
 
   return (

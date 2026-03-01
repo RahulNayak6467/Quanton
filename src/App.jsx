@@ -3,13 +3,11 @@ import Navbar from "./Components/Navbar";
 import Hero from "./Components/Hero";
 import StockChart from "./Components/Charts/LightWeightCharts";
 import FeaturesList from "./Components/FeaturesList";
-import { useState } from "react";
 import Features from "./Components/Features";
 import Testimonails from "./Components/Testimonials";
 import HowItWorks from "./Components/HowItWorks";
 import HowIt from "./Components/HowIt";
 import CTA from "./Components/CTA";
-import { RetroGrid } from "./components/ui/retro-grid";
 import Footer from "./Components/Footer";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import UnsignedUser from "./Pages/UnsignedUser";
@@ -18,13 +16,19 @@ import SignUp from "./Pages/SignUp";
 import Dashboard from "./Pages/Dashboard";
 import ProtectedRoutes from "./Context/ProtectedRoutes";
 import AuthProvider from "./Context/AuthContext";
+import Dashboard1 from "./Pages/Dashboard";
+import Layout from "./Pages/Layout";
+import WatchList from "./Pages/WatchList";
+import StockDetail from "./Pages/StockDetail";
+import Alerts from "./Pages/Alerts";
+import Discover from "./Pages/Discover";
 
 const generateData = () => {
   const data = [];
   let value = 150;
   const startDate = new Date("2023-01-01");
 
-  for (let i = 0; i < 365; i++) {
+  for (let i = 0; i < 25; i++) {
     const date = new Date(startDate);
     date.setDate(startDate.getDate() + i);
 
@@ -42,13 +46,36 @@ const generateData = () => {
   return data;
 };
 
-const initialData = generateData();
+// const initialData = generateData();
 
-function App(props) {
+function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <UnsignedUser props={props} data={initialData} />,
+      //   element: <UnsignedUser props={props} data={initialData} />,
+      element: <Layout />,
+      children: [
+        {
+          path: "",
+          element: <Dashboard1 />,
+        },
+        {
+          path: "/WatchList",
+          element: <WatchList />,
+        },
+        {
+          path: "/StockDetail",
+          element: <StockDetail />,
+        },
+        {
+          path: "/Alerts",
+          element: <Alerts />,
+        },
+        {
+          path: "/Discover",
+          element: <Discover />,
+        },
+      ],
     },
     {
       path: "/SignUp",

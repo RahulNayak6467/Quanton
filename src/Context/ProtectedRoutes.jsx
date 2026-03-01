@@ -1,6 +1,7 @@
 import { createContext, useContext } from "react";
 import { useAuth } from "./AuthContext";
 import { Navigate } from "react-router-dom";
+import Loader from "@/Components/Loader";
 
 const RoutesContext = createContext();
 
@@ -17,8 +18,8 @@ const ProtectedRoutes = ({ children }) => {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-bg-page">
-        <p className="text-text-secondary">Loading...</p>
+      <div className="min-h-screen flex items-center justify-center bg-bg-page">
+        <Loader />;
       </div>
     );
   }

@@ -1,4 +1,3 @@
-import { RetroGrid } from "@/components/ui/retro-grid";
 import Navbar from "@/Components/Navbar";
 import Hero from "@/Components/Hero";
 import Features from "@/Components/Features";
@@ -11,7 +10,7 @@ import Footer from "@/Components/Footer";
 function UnsignedUser({ props, data }) {
   return (
     <div className=" min-h-screen bg-bg-page p-6 overflow-x-hidden">
-      <RetroGrid />
+      {/* <RetroGrid /> */}
       <Navbar />
       <Hero props={props} data={data} />
       {/* <StockChart {...props} data={dataArr} />*/}
