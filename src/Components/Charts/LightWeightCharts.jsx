@@ -11,7 +11,10 @@ function StockChart(props) {
   const {
     data,
     colors: {
-      backgroundColor = "#1a2332", // chart background
+      color = "#10b981",
+      widthBar,
+      heightBar,
+      backgroundColor = "#0D1117 ", // chart background
       lineColor = "#10b981", // color of the line
       textColor = "white", // axis text color
       areaTopColor = "#10b981", // gradient color at top
@@ -20,6 +23,7 @@ function StockChart(props) {
   } = props;
 
   const chartContainer = useRef();
+  console.log(color);
 
   useEffect(() => {
     const handleResize = () => {
@@ -28,10 +32,10 @@ function StockChart(props) {
 
     const chart = createChart(chartContainer.current, {
       layout: {
-        background: { color: "#0d1117" },
+        background: { color: "transparent" },
         textColor: "#8B949E",
       },
-      width: 120,
+      width: 200,
       height: 60,
       grid: {
         vertLines: { visible: false },
@@ -93,9 +97,18 @@ function StockChart(props) {
     chart.timeScale().fitContent();
 
     const newSeries = chart.addSeries(AreaSeries, {
-      lineColor: "#00C896",
-      topColor: "rgba(0, 200, 150, 0.25)",
-      bottomColor: "rgba(0, 200, 150, 0.02)",
+      //   lineColor: "#00C896",
+      //   topColor: "rgba(0, 200, 150, 0.25)",
+      //   bottomColor: "rgba(0, 200, 150, 0.02)",
+      // topColor: "rgba(34, 197, 94, 0.4)", // green with opacity
+      // bottomColor: "rgba(34, 197, 94, 0)", // fully transparent
+      // lineColor: "rgba(34, 197, 94, 1)",
+      //   topColor: { topColorBar },
+      //   bottomColor: { bottomColorBar },
+      //   lineColor: { lineColorBar },
+      lineColor: color,
+      topColor: color + "40", // hex opacity ~25%
+      bottomColor: color + "00", // fully transparent
       lineWidth: 2,
       //   lineColor: "#10B981",
       //   topColor: "#10B98160",
@@ -105,8 +118,8 @@ function StockChart(props) {
       lastValueVisible: false, // removes the label on y axis
       crosshairMarkerVisible: true, // keeps the dot on the line
       crosshairMarkerRadius: 4,
-      crosshairMarkerBorderColor: "#10B981",
-      crosshairMarkerBackgroundColor: "#10B981",
+      crosshairMarkerBorderColor: color,
+      crosshairMarkerBackgroundColor: color,
     });
 
     newSeries.setData(data);
@@ -124,6 +137,10 @@ function StockChart(props) {
     textColor,
     areaTopColor,
     areaBottomColor,
+    heightBar,
+    color,
+
+    widthBar,
   ]);
 
   return <div ref={chartContainer} />;
