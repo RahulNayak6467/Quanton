@@ -16,7 +16,6 @@ import SignUp from "./Pages/SignUp";
 import Dashboard from "./Pages/Dashboard";
 import ProtectedRoutes from "./Context/ProtectedRoutes";
 import AuthProvider from "./Context/AuthContext";
-import Dashboard1 from "./Pages/Dashboard";
 import Layout from "./Pages/Layout";
 import WatchList from "./Pages/WatchList";
 import StockDetail from "./Pages/StockDetail";
@@ -57,7 +56,7 @@ function App() {
       children: [
         {
           path: "",
-          element: <Dashboard1 />,
+          element: <Dashboard />,
         },
         {
           path: "/WatchList",

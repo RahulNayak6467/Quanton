@@ -25,14 +25,19 @@ function MiniChart({ stockData, data, colors }) {
               {stockData?.changePercentage?.toFixed(2)}%
             </p>
           </div>
-          <TrendingDown
+          {/* <TrendingDown
             size={18}
             className={
               stockData?.changePercentage > 0
                 ? "text-positive"
                 : "text-negative"
             }
-          />
+          /> */}
+          {stockData?.changePercentage > 0 ? (
+            <TrendingUp size={18} className="text-positive" />
+          ) : (
+            <TrendingDown size={18} className="text-negative" />
+          )}
         </div>
       </div>
       <div>
