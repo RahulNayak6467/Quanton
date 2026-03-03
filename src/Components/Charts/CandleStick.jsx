@@ -15,10 +15,10 @@ function CandlestickChart({ data }) {
         textColor: "#8B949E",
       },
       width: chartContainer.current.clientWidth,
-      height: 400,
+      height: 500,
       grid: {
         vertLines: { visible: false },
-        horzLines: { visible: true, color: "#94a3b850" },
+        horzLines: { visible: true, color: "#21262D33" },
         color: "red",
       },
       rightPriceScale: {
@@ -83,7 +83,7 @@ function CandlestickChart({ data }) {
       data.map((d) => ({
         time: d.time,
         value: d.volume,
-        color: d.close >= d.open ? "#22c55e33" : "#ef444433",
+        color: d.close >= d.open ? "#22c55e22" : "#ef444422",
       })),
     );
 

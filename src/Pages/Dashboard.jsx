@@ -119,7 +119,6 @@ function Dashboard() {
     retry: false, // disable auto retry
     refetchOnWindowFocus: false,
   });
-
   const fetchHistoryData = async (checkHistory) => {
     const to = new Date().toISOString().split("T")[0];
     const from = new Date();
@@ -212,7 +211,7 @@ function Dashboard() {
       </div>
       <div className="grid grid-cols-20 px-20 gap-7 mt-5">
         <div className="col-span-15 grid-cols-1 gap-y-4">
-          <div className="border-2 border-[#30363D]  bg-[#0D1117]  rounded-2xl -mr-0.5 p-2">
+          <div className="border-2 border-[#21262D]  bg-[#0D1117]  rounded-2xl -mr-0.5 p-2">
             <div>
               <div className="flex justify-between items-center  p-4">
                 <div className="flex gap-4 items-center">
@@ -302,7 +301,7 @@ function Dashboard() {
                   </button>
                 </div>
               </div>
-              <div className="p-6 border-zinc-700 m-4 mb-8 border-2 rounded-2xl">
+              <div className="p-6 border-[#21262D] m-4  border-2 rounded-2xl">
                 <CandlestickChart data={candleStickData} className="p-6" />
               </div>
             </div>

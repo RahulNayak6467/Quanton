@@ -45,36 +45,13 @@ const generateData = () => {
   return data;
 };
 
-// const initialData = generateData();
+const initialData = generateData();
 
-function App() {
+function App(props) {
   const router = createBrowserRouter([
     {
       path: "/",
-      //   element: <UnsignedUser props={props} data={initialData} />,
-      element: <Layout />,
-      children: [
-        {
-          path: "",
-          element: <Dashboard />,
-        },
-        {
-          path: "/WatchList",
-          element: <WatchList />,
-        },
-        {
-          path: "/StockDetail",
-          element: <StockDetail />,
-        },
-        {
-          path: "/Alerts",
-          element: <Alerts />,
-        },
-        {
-          path: "/Discover",
-          element: <Discover />,
-        },
-      ],
+      element: <UnsignedUser props={props} data={initialData} />,
     },
     {
       path: "/SignUp",
@@ -85,12 +62,34 @@ function App() {
       element: <LoginPage />,
     },
     {
-      path: "/dashboard",
-      element: (
-        <ProtectedRoutes>
-          <Dashboard />
-        </ProtectedRoutes>
-      ),
+      path: "/LoggedIn",
+      element: <Layout />,
+      children: [
+        {
+          path: "",
+          element: (
+            <ProtectedRoutes>
+              <Dashboard />
+            </ProtectedRoutes>
+          ),
+        },
+        // {
+        //   path: "/WatchList",
+        //   element: <WatchList />,
+        // },
+        // {
+        //   path: "/StockDetail",
+        //   element: <StockDetail />,
+        // },
+        // {
+        //   path: "/Alerts",
+        //   element: <Alerts />,
+        // },
+        // {
+        //   path: "/Discover",
+        //   element: <Discover />,
+        // },
+      ],
     },
   ]);
 
