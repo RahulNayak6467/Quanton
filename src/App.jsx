@@ -21,6 +21,7 @@ import WatchList from "./Pages/WatchList";
 import StockDetail from "./Pages/StockDetail";
 import Alerts from "./Pages/Alerts";
 import Discover from "./Pages/Discover";
+import Tables from "./Components/DashboardPage/Tables";
 
 const generateData = () => {
   const data = [];
@@ -52,6 +53,7 @@ function App(props) {
     {
       path: "/",
       element: <UnsignedUser props={props} data={initialData} />,
+      //   element: <Tables />,
     },
     {
       path: "/SignUp",
@@ -94,7 +96,8 @@ function App(props) {
   ]);
 
   return (
-    <div className=" bg-bg-page">
+    // <div className=" bg-bg-page">
+    <div className="bg-bg-page">
       <AuthProvider>
         <RouterProvider router={router} />
       </AuthProvider>

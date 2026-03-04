@@ -7,13 +7,16 @@ import { TrendingDown, TrendingUp } from "lucide-react";
 import useStockData from "@/CustomHooks/UseStockData";
 import useStockHistory from "@/CustomHooks/useStockHistory";
 import useStockPeriod from "@/CustomHooks/useStockPeriod";
+import Tables from "@/Components/DashboardPage/Tables";
+import useTopCategories from "@/CustomHooks/useTopCategory";
 
 function Dashboard() {
   const { stockData, isLoading } = useStockData();
   const { data, isLoadingChart } = useStockHistory();
   const { candleStickData, HistoryLoader, currentBtn, handleCheckHistory } =
     useStockPeriod();
-
+  const { PositiveGain, NegativeGain, positiveLoading, negativeLoading } =
+    useTopCategories();
   if (isLoading) {
     return <Loader />;
   }
@@ -164,8 +167,38 @@ function Dashboard() {
           {/* <div className="border-2 border-accent  h-70  rounded-xl -mr-0.5"></div> */}
         </div>
         <div className="grid grid-cols-1 gap-y-4 col-span-5">
-          <div className="border-2 border-red-500  h-100 rounded-xl -ml-1"></div>
-          <div className="border-2 border-red-500 h-100 rounded-xl -ml-1"></div>
+          <div className="border-2 border-[#21262D] h-fit rounded-xl -ml-1">
+            <div className="p-6 flex items-center justify-between">
+              <h1 className="uppercase text-xl font-bold text-left text-positive">
+                Top Gainers
+              </h1>
+              <p className="text-sm text-text-secondary">
+                <span className="text-positive">●</span> Market Open{" "}
+              </p>
+            </div>
+            <Tables
+              color={"text-positive"}
+              increasing={true}
+              data={PositiveGain}
+              isLoading={positiveLoading}
+            />
+          </div>
+          <div className="border-2 border-[#21262D] h-fit rounded-xl -ml-1">
+            <div className="p-6 flex items-center justify-between">
+              <h1 className="uppercase text-xl font-bold text-left text-negative">
+                Top losers
+              </h1>
+              <p className="text-sm text-text-secondary">
+                <span className="text-positive">●</span> Market Open{" "}
+              </p>
+            </div>
+            <Tables
+              color={"text-negative"}
+              increasing={false}
+              data={NegativeGain}
+              isLoading={negativeLoading}
+            />
+          </div>
         </div>
       </div>
     </div>
