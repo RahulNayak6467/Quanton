@@ -12,7 +12,7 @@ import {
 
 function Nav() {
   return (
-    <header className="p-3 mb-18">
+    <header className="p-3 mb-2">
       <nav className=" backdrop-blur-md border-b  flex justify-between items-center font-sans border border-zinc-800  p-2 rounded-2xl">
         <div className=" flex items-center gap-3">
           <CircleDollarSign size={48} className=" fill-accent " />

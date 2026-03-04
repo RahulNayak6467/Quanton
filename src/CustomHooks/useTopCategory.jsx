@@ -1,9 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 
 function useTopCategories() {
+  const apiKey = import.meta.env.VITE_FMP_API_KEY;
   const fetchTopGainers = async () => {
     const response = await fetch(
-      `https://financialmodelingprep.com/stable/biggest-gainers?apikey=q4Ku7CGedFTb5gyQ9AZhpaKjCo7ICL3p`,
+      `https://financialmodelingprep.com/stable/biggest-gainers?apikey=${apiKey}`,
     );
     const data = await response.json();
     const topGainers = data.slice(0, 5);
@@ -20,7 +21,7 @@ function useTopCategories() {
 
   const fetchTopLosers = async () => {
     const response = await fetch(
-      `https://financialmodelingprep.com/stable/biggest-losers?apikey=q4Ku7CGedFTb5gyQ9AZhpaKjCo7ICL3p`,
+      `https://financialmodelingprep.com/stable/biggest-losers?apikey=${apiKey}`,
     );
     const data = await response.json();
     const topGainers = data.slice(0, 5);

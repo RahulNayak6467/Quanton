@@ -16,7 +16,7 @@ function Tables({ color, increasing, data, isLoading }) {
     return <Loader />;
   }
   return (
-    <Table className=" mx-auto h-100  ">
+    <Table className=" mx-auto h-120  ">
       <TableHeader>
         <TableRow>
           <TableHead className="border-r border-t border-t-[#21262d]  text-text-secondary text-xs border-r-[#21262D] uppercase">
@@ -37,10 +37,15 @@ function Tables({ color, increasing, data, isLoading }) {
         {data.map((gainers) => (
           <TableRow key={gainers.symbol}>
             <TableCell className="font-medium text-text-secondary text-center border-r border-r-[#21262D]">
-              <img
+              {/* <img
                 src={`https://financialmodelingprep.com/image-stock/${gainers.symbol}.png`}
                 alt={gainers.symbol}
                 className="w-7 h-7 rounded-full ml-7 mt-2"
+              /> */}
+              {/* // `https://img.logo.dev/ticker/${stock.symbol}?token=YOUR_KEY` */}
+              <img
+                src={`https://img.logo.dev/ticker/${gainers.symbol}?token=pk_c_tteg2kSPKs1fwVTFOkTg&retina=true`}
+                className="h-8 w-8 ml-7 rounded-full"
               />
             </TableCell>
             <TableCell className="border-r  text-text-secondary text-center border-r-[#21262D]">

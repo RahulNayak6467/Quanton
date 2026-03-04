@@ -22,6 +22,7 @@ import StockDetail from "./Pages/StockDetail";
 import Alerts from "./Pages/Alerts";
 import Discover from "./Pages/Discover";
 import Tables from "./Components/DashboardPage/Tables";
+import LatestNews from "./Components/DashboardPage/LatestNews";
 
 const generateData = () => {
   const data = [];
@@ -54,6 +55,7 @@ function App(props) {
       path: "/",
       element: <UnsignedUser props={props} data={initialData} />,
       //   element: <Tables />,
+      //   element: <LatestNews />,
     },
     {
       path: "/SignUp",
