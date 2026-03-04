@@ -1,163 +1,18 @@
 import Nav from "@/Components/DashboardPage/Nav";
 import Navbar from "@/Components/Navbar";
-import { useQuery } from "@tanstack/react-query";
 import Loader from "@/Components/Loader";
 import MiniChart from "@/Components/DashboardPage/MiniChart";
 import CandlestickChart from "@/Components/Charts/CandleStick";
 import { TrendingDown, TrendingUp } from "lucide-react";
-import { useState } from "react";
-const apiKey = import.meta.env.VITE_FMP_API_KEY;
+import useStockData from "@/CustomHooks/UseStockData";
+import useStockHistory from "@/CustomHooks/useStockHistory";
+import useStockPeriod from "@/CustomHooks/useStockPeriod";
 
 function Dashboard() {
-  const [checkHistory, setCheckHistory] = useState(300);
-  const [currentBtn, setCurrentBtn] = useState(4);
-
-  const handleCheckHistory = (dataHistory, currentBtnNumber) => {
-    setCheckHistory(dataHistory);
-    setCurrentBtn(currentBtnNumber);
-  };
-
-  const fetchStockData = async () => {
-    const response = await Promise.all([
-      fetch(
-        `https://financialmodelingprep.com/stable/quote?symbol=^GSPC&apikey=${apiKey}`,
-      ),
-      fetch(
-        `https://financialmodelingprep.com/stable/quote?symbol=^IXIC&apikey=${apiKey}`,
-      ),
-      fetch(
-        `https://financialmodelingprep.com/stable/quote?symbol=^RUT&apikey=${apiKey}`,
-      ),
-      fetch(
-        `https://financialmodelingprep.com/stable/quote?symbol=^FTSE&apikey=${apiKey}`,
-      ),
-    ]);
-
-    const data = await Promise.all(response.map((res) => res.json()));
-
-    return data;
-  };
-
-  const { data: stockData, isLoading } = useQuery({
-    queryKey: ["IndexesName"],
-    queryFn: () => fetchStockData(),
-    staleTime: Infinity,
-    gcTime: 1000 * 60 * 60, // keep in cache for 1 hour
-    retry: false, // disable auto retry
-    refetchOnWindowFocus: false,
-  });
-
-  const fetchData = async () => {
-    const to = new Date().toISOString().split("T")[0];
-    const from = new Date();
-    // from.setDate(from.getDate() - Math.trunc(checkHistory % 30));
-    // from.setMonth(from.getMonth() - (Math.trunc(checkHistory / 30) % 12));
-    // from.setFullYear(from.getFullYear() - Math.trunc(checkHistory / 365));
-    from.setMonth(from.getMonth() - 6);
-    const fromStr = from.toISOString().split("T")[0];
-    const res = await Promise.all([
-      fetch(
-        `https://financialmodelingprep.com/stable/historical-price-eod/full?symbol=^GSPC&from=${fromStr}&to=${to}&apikey=${import.meta.env.VITE_FMP_API_KEY}`,
-      ),
-      fetch(
-        `https://financialmodelingprep.com/stable/historical-price-eod/full?symbol=^IXIC&from=${fromStr}&to=${to}&apikey=${import.meta.env.VITE_FMP_API_KEY}`,
-      ),
-      fetch(
-        `https://financialmodelingprep.com/stable/historical-price-eod/full?symbol=^RUT&from=${fromStr}&to=${to}&apikey=${import.meta.env.VITE_FMP_API_KEY}`,
-      ),
-      fetch(
-        `https://financialmodelingprep.com/stable/historical-price-eod/full?symbol=^FTSE&from=${fromStr}&to=${to}&apikey=${import.meta.env.VITE_FMP_API_KEY}`,
-      ),
-    ]);
-    // if (!res.ok) {
-    //   console.log("An error occured", res.status);
-    //   return;
-    // }
-    const data = await Promise.all(res.map((r) => r.json()));
-
-    console.log(data);
-
-    const requiredData = data.map((el) =>
-      el.reverse().map((d) => {
-        return {
-          time: d.date,
-          value: d.close,
-        };
-      }),
-    );
-
-    // const candlestickSeries = data[0].map((d) => ({
-    //   time: d.date,
-    //   open: d.open,
-    //   high: d.high,
-    //   low: d.low,
-    //   close: d.close,
-    //   volume: d?.volume,
-    // }));
-    // const candlestickSeries = data[0].map((el) =>
-    //   el.reverse().map((d) => {
-    //     return {
-    //       time: d.date,
-    //       open: d.open,
-    //       high: d.high,
-    //       low: d.low,
-    //       close: d.close,
-    //     };
-    //   }),
-    // );
-
-    console.log(requiredData);
-    // console.log(candlestickSeries);
-    return requiredData;
-  };
-
-  const { data, isLoading: isLoadingChart } = useQuery({
-    queryKey: ["IndexesHistory"],
-    queryFn: () => fetchData(),
-    staleTime: Infinity,
-    gcTime: 1000 * 60 * 60, // keep in cache for 1 hour
-    retry: false, // disable auto retry
-    refetchOnWindowFocus: false,
-  });
-  const fetchHistoryData = async (checkHistory) => {
-    const to = new Date().toISOString().split("T")[0];
-    const from = new Date();
-    from.setDate(from.getDate() - Math.trunc(checkHistory % 30));
-    from.setMonth(from.getMonth() - (Math.trunc(checkHistory / 30) % 12));
-    from.setFullYear(from.getFullYear() - Math.trunc(checkHistory / 365));
-    const fromStr = from.toISOString().split("T")[0];
-    try {
-      const response = await fetch(
-        ` https://financialmodelingprep.com/stable/historical-price-eod/full?symbol=^IXIC&from=${fromStr}&to=${to}&apikey=${import.meta.env.VITE_FMP_API_KEY}`,
-      );
-
-      if (!response.ok) {
-        console.log(`An error occured ${response.status}`);
-      }
-      const data = await response.json();
-
-      const candlestickSeries = data.reverse().map((d) => ({
-        time: d.date,
-        open: d.open,
-        high: d.high,
-        low: d.low,
-        close: d.close,
-        volume: d?.volume,
-      }));
-      return candlestickSeries;
-    } catch (err) {
-      console.log(err.message);
-    }
-  };
-
-  const { data: candleStickData, isLoading: HistoryLoader } = useQuery({
-    queryKey: ["getIndexHistory", checkHistory],
-    queryFn: () => fetchHistoryData(checkHistory),
-    staleTime: Infinity,
-    gcTime: 1000 * 60 * 60, // keep in cache for 1 hour
-    retry: false, // disable auto retry
-    refetchOnWindowFocus: false,
-  });
+  const { stockData, isLoading } = useStockData();
+  const { data, isLoadingChart } = useStockHistory();
+  const { candleStickData, HistoryLoader, currentBtn, handleCheckHistory } =
+    useStockPeriod();
 
   if (isLoading) {
     return <Loader />;

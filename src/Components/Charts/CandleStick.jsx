@@ -18,7 +18,7 @@ function CandlestickChart({ data }) {
       height: 500,
       grid: {
         vertLines: { visible: false },
-        horzLines: { visible: true, color: "#21262D33" },
+        horzLines: { visible: true, color: "#21262D55" },
         color: "red",
       },
       rightPriceScale: {

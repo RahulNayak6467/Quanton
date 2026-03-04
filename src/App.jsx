@@ -73,22 +73,22 @@ function App(props) {
             </ProtectedRoutes>
           ),
         },
-        // {
-        //   path: "/WatchList",
-        //   element: <WatchList />,
-        // },
-        // {
-        //   path: "/StockDetail",
-        //   element: <StockDetail />,
-        // },
-        // {
-        //   path: "/Alerts",
-        //   element: <Alerts />,
-        // },
-        // {
-        //   path: "/Discover",
-        //   element: <Discover />,
-        // },
+        {
+          path: "WatchList",
+          element: <WatchList />,
+        },
+        {
+          path: "StockDetail",
+          element: <StockDetail />,
+        },
+        {
+          path: "Alerts",
+          element: <Alerts />,
+        },
+        {
+          path: "Discover",
+          element: <Discover />,
+        },
       ],
     },
   ]);
