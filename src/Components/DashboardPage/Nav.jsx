@@ -12,8 +12,8 @@ import {
 
 function Nav() {
   return (
-    <header className="p-3 mb-2">
-      <nav className=" backdrop-blur-md border-b  flex justify-between items-center font-sans border border-zinc-800  p-2 rounded-2xl">
+    <header className="p-3 mb-2 backdrop-blur-3xl">
+      <nav className="  border-b backdrop-blur-3xl flex justify-between items-center font-sans border shadow-[0_0_20px_rgba(0,0,0,0.7)]  border-dashboard-border bg-dashboard-card  px-2 py-0.5 rounded-2xl">
         <div className=" flex items-center gap-3">
           <CircleDollarSign size={48} className=" fill-accent " />
           <p className="text-text-primary text-xl ">Quanton</p>
@@ -22,27 +22,27 @@ function Nav() {
           <ul className="flex justify-between gap-15 text-lg text-text-secondary">
             <NavMenu
               features={"Dashboard"}
-              route={"/"}
+              route={"/LoggedIn"}
               Icon={<LayoutDashboard size={20} />}
             ></NavMenu>
             <NavMenu
               features={"WatchList"}
-              route={"/WatchList"}
+              route={"/LoggedIn/WatchList"}
               Icon={<BookMarked size={20} />}
             ></NavMenu>
             <NavMenu
               features={"StockDetail"}
-              route={"/StockDetail"}
+              route={"/LoggedIn/StockDetail"}
               Icon={<ChartNoAxesCombined size={20} />}
             ></NavMenu>
             <NavMenu
               features={"Alerts"}
-              route={"/Alerts"}
+              route={"/LoggedIn/Alerts"}
               Icon={<Bell size={20} />}
             ></NavMenu>
             <NavMenu
               features={"Discover"}
-              route={"/Discover"}
+              route={"/LoggedIn/Discover"}
               Icon={<Search size={20} />}
             ></NavMenu>
           </ul>

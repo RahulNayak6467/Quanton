@@ -8,14 +8,24 @@
   --color-bg-card: #111827;
   --color-bg-elevated: #1a2332;
 
-  /* Accent */
+  --color-dashboard-page: #0a101b;
+  --color-dashboard-card: #0b1220;
+  --color-dashboard-border: #1f2937;
+  /* --bg-primary: #0B1220;      Main page background */
+  /* --bg-secondary: #111827;    /* Cards */
+  /* --bg-tertiary: #0F172A;     Navbar / subtle sections */
+  /* --border-color: #1F2937;    Card borders */ /* Accent */
   --color-accent: #10b981;
   --color-accent-hover: #059669;
 
   /* Text */
-  --color-text-primary: #f1f5f9;
+  /* --color-text-primary: #f1f5f9;
   --color-text-secondary: #94a3b8;
-  --color-text-disabled: #475569;
+  --color-text-disabled: #475569; */
+
+  --color-text-primary: #e5e7eb; /* Main headings */
+  --color-text-secondary: #9ca3af; /* Subtext */
+  --color-text-disabled: #6b7280; /* Labels, timestamps */
 
   /* Stock Colors */
   --color-positive: #10b981;

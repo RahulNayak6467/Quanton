@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-function useLatestNews() {
+
+function useStockNews() {
   const alphaVantageApiKey = import.meta.env.VITE_ALPHA_VANTAGE_API_KEY;
 
   const fetchNews = async () => {
-    const response = await fetch(
-      `https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=AAPL&limit=10&apikey=${alphaVantageApiKey}`,
-    );
+    const response = await fetch(`
+     https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=AAPL&limit=10&apikey=${alphaVantageApiKey}`);
     const data = await response.json();
 
     console.log(data);
@@ -23,4 +23,4 @@ function useLatestNews() {
   return { newsData, newsLoadingData };
 }
 
-export default useLatestNews;
+export default useStockNews;

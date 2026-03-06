@@ -16,19 +16,19 @@ function Tables({ color, increasing, data, isLoading }) {
     return <Loader />;
   }
   return (
-    <Table className=" mx-auto h-120  ">
+    <Table className=" mx-auto h-120 bg-dashboard-card ">
       <TableHeader>
         <TableRow>
-          <TableHead className="border-r border-t border-t-[#21262d]  text-text-secondary text-xs border-r-[#21262D] uppercase">
+          <TableHead className="border-r border-t border-t-dashboard-border  text-text-secondary text-xs border-r-dashboard-border uppercase">
             Logo
           </TableHead>
-          <TableHead className="border-r border-t border-t-[#21262d]  text-text-secondary text-xs border-r-[#21262D] uppercase">
+          <TableHead className="border-r border-t  border-t-dashboard-border   text-text-secondary text-xs border-r-dashboard-border uppercase">
             Symbol
           </TableHead>
-          <TableHead className="border-r border-t border-t-[#21262d]  text-text-secondary text-xs border-r-[#21262D] uppercase">
+          <TableHead className="border-r border-t  border-t-dashboard-border   text-text-secondary text-xs border-r-dashboard-border  uppercase">
             Price
           </TableHead>
-          <TableHead className="border-r border-t border-t-[#21262d]  text-text-secondary text-xs border-r-[#21262D] uppercase">
+          <TableHead className="border-r border-t  border-t-dashboard-border   text-text-secondary text-xs border-r-dashboard-border  uppercase">
             Change
           </TableHead>
         </TableRow>
@@ -36,7 +36,7 @@ function Tables({ color, increasing, data, isLoading }) {
       <TableBody>
         {data.map((gainers) => (
           <TableRow key={gainers.symbol}>
-            <TableCell className="font-medium text-text-secondary text-center border-r border-r-[#21262D]">
+            <TableCell className="font-medium text-text-secondary text-center border-r border-r-dashboard-border">
               {/* <img
                 src={`https://financialmodelingprep.com/image-stock/${gainers.symbol}.png`}
                 alt={gainers.symbol}
@@ -48,14 +48,14 @@ function Tables({ color, increasing, data, isLoading }) {
                 className="h-8 w-8 ml-7 rounded-full"
               />
             </TableCell>
-            <TableCell className="border-r  text-text-secondary text-center border-r-[#21262D]">
+            <TableCell className="border-r  text-text-secondary text-center border-r-dashboard-border">
               {gainers.symbol}
             </TableCell>
-            <TableCell className="border-r  text-text-secondary text-center border-r-[#21262D]">
+            <TableCell className="border-r  text-text-secondary text-center border-r-dashboard-border">
               ${gainers.price.toFixed(2)}
             </TableCell>
             <TableCell
-              className={`border-r flex h-full justify-center items-center gap-1 w-full  ${color} text-center border-r-[#21262D]`}
+              className={`border-r flex h-full justify-center items-center gap-1 w-full  ${color} text-center border-r-dashboard-border`}
             >
               {gainers.changesPercentage.toFixed(2)}%
               {increasing ? (

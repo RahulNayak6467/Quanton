@@ -9,11 +9,8 @@ import useStockHistory from "@/CustomHooks/useStockHistory";
 import useStockPeriod from "@/CustomHooks/useStockPeriod";
 import Tables from "@/Components/DashboardPage/Tables";
 import useTopCategories from "@/CustomHooks/useTopCategory";
-import { useQuery } from "@tanstack/react-query";
 import LatestNews from "@/Components/DashboardPage/LatestNews";
 import useLatestNews from "@/CustomHooks/useLastestNews";
-
-const alphaVantageApiKey = import.meta.env.VITE_ALPHA_VANTAGE_API_KEY;
 
 function Dashboard() {
   const { stockData, isLoading } = useStockData();
@@ -22,82 +19,21 @@ function Dashboard() {
     useStockPeriod();
   const { PositiveGain, NegativeGain, positiveLoading, negativeLoading } =
     useTopCategories();
-  //   const { newsData, newsLoadingData, timeAgo } = useLatestNews();
-
-  const dummyNews = [
-    {
-      summary:
-        "NVIDIA reported record-breaking quarterly revenue of $22.1 billion, surpassing analyst expectations by a wide margin. The surge was primarily driven by unprecedented demand for its H100 AI chips from major cloud providers and tech giants racing to build out their artificial intelligence infrastructure.",
-      url: "https://example.com/news/1",
-      time_published: "20260304T120000",
-      source: "Reuters",
-      topics: [{ topic: "Technology" }],
-    },
-    {
-      summary:
-        "Federal Reserve officials signaled a potential interest rate cut in the coming months as inflation continues to show signs of cooling. Several policymakers expressed confidence that the economy is on track for a soft landing, though they emphasized data dependency before making any final decisions.",
-      url: "https://example.com/news/2",
-      time_published: "20260304T100000",
-      source: "Bloomberg",
-      topics: [{ topic: "Financial Markets" }],
-    },
-    {
-      summary:
-        "Apple announced a sweeping set of AI features across its entire product lineup at its annual developer conference. The updates include an upgraded Siri powered by large language models, AI-assisted writing tools, and deep integration with third party applications across iPhone, iPad and Mac.",
-      url: "https://example.com/news/3",
-      time_published: "20260304T080000",
-      source: "CNBC",
-      topics: [{ topic: "Technology" }],
-    },
-    {
-      summary:
-        "The S&P 500 closed at an all time high on Friday as a string of strong corporate earnings reports boosted investor sentiment. Technology and healthcare sectors led the gains with several blue chip companies reporting profits well above Wall Street forecasts for the quarter.",
-      url: "https://example.com/news/4",
-      time_published: "20260303T150000",
-      source: "MarketWatch",
-      topics: [{ topic: "Financial Markets" }],
-    },
-    {
-      summary:
-        "Tesla announced plans to significantly expand production capacity at its Gigafactory in Austin, Texas. The expansion is expected to add over 500,000 units of annual production capacity and create thousands of new jobs, as the company aims to meet growing demand for its Model Y and upcoming Cybertruck variants.",
-      url: "https://example.com/news/5",
-      time_published: "20260303T120000",
-      source: "Financial Times",
-      topics: [{ topic: "Earnings" }],
-    },
-  ];
-
-  //   const fetchNews = async () => {
-  //     const response = await fetch(
-  //       `https://www.alphavantage.co/query?function=NEWS_SENTIMENT&topics=financial_markets&apikey=${alphaVantageApiKey}`,
-  //     );
-  //     const data = await response.json();
-
-  //     console.log(data);
-
-  //     return data;
-  //   };
-
-  //   const { data: newsData, isLoading: newLoadingData } = useQuery({
-  //     queryKey: ["latestNews"],
-  //     queryFn: () => fetchNews(),
-  //     staleTime: Infinity,
-  //     gcTime: 60 * 60 * 1000,
-  //   });
-
-  //   if (newLoadingData) {
-  //     return <Loader />;
-  //   }
+  const { newsData, newsLoadingData } = useLatestNews();
 
   //   if (newsLoadingData) {
+  //     return <loader />;
+  //   }
+
+  //   if (isLoading) {
   //     return <Loader />;
   //   }
 
-  if (isLoading) {
-    return <Loader />;
-  }
+  //   if (isLoadingChart) {
+  //     return <Loader />;
+  //   }
 
-  if (isLoadingChart) {
+  if (newsLoadingData || isLoading || isLoadingChart) {
     return <Loader />;
   }
 
@@ -148,7 +84,7 @@ function Dashboard() {
       </div>
       <div className="grid grid-cols-20 px-20 gap-7 mt-5">
         <div className="col-span-15 grid-cols-1 gap-y-4">
-          <div className="border-2 border-[#21262D]  bg-[#0D1117]  rounded-2xl -mr-0.5 p-2">
+          <div className="border-2 border-dashboard-border  bg-dashboard-card  rounded-2xl -mr-0.5 p-2">
             <div>
               <div className="flex justify-between items-center  p-4">
                 <div className="flex gap-4 items-center">
@@ -238,28 +174,31 @@ function Dashboard() {
                   </button>
                 </div>
               </div>
-              <div className="p-6 border-[#21262D] m-4  border-2 rounded-2xl">
+              <div className="p-6 border-dashboard-border bg-dashboard-page m-4  border-2 rounded-2xl">
                 <CandlestickChart data={candleStickData} className="p-6" />
               </div>
             </div>
           </div>
-          <div className="border-2 border-[#21262D]  h-110  rounded-xl mt-4">
-            <div className="border-b border-b-[#21262D] px-6 py-4">
-              <h1 className="text-positive text-3xl  uppercase font-bold border-b border-b-[#21262D]">
+          <div className="border-2 border-dashboard-border  h-110  rounded-xl mt-4">
+            <div className="border-b border-b-dashboard-border bg-dashboard-card px-6 py-4 rounded-2xl">
+              <h1 className="text-positive text-3xl  uppercase font-bold border-b border-b-[#21262D] ">
                 Latest News
               </h1>
               {/* {newsData.feed.slice(0, 5).map((news, index) => (
                 <LatestNews data={news} index={index + 1} timeAgo={timeAgo} />
               ))} */}
-              {dummyNews.map((news, index) => (
+              {/* {dummyNews.map((news, index) => (
+                <LatestNews data={news} index={index + 1} />
+              ))} */}
+              {newsData.feed.slice(5, 10).map((news, index) => (
                 <LatestNews data={news} index={index + 1} />
               ))}
             </div>
           </div>
         </div>
         <div className="grid grid-cols-1 gap-y-4 col-span-5">
-          <div className="border-2 border-[#21262D] h-fit rounded-xl -ml-1">
-            <div className="p-6 flex items-center justify-between">
+          <div className="border-2 border-dashboard-border h-fit rounded-xl -ml-1">
+            <div className="p-6 flex items-center justify-between  bg-dashboard-card rounded-2xl">
               <h1 className="uppercase text-xl font-bold text-left text-positive">
                 Top Gainers
               </h1>
@@ -274,9 +213,9 @@ function Dashboard() {
               isLoading={positiveLoading}
             />
           </div>
-          <div className="border-2 border-[#21262D] h-fit rounded-xl -ml-1">
-            <div className="p-6 flex items-center justify-between">
-              <h1 className="uppercase text-xl font-bold text-left text-negative">
+          <div className="border-2 border-dashboard-border h-fit rounded-xl -ml-1">
+            <div className="p-6 flex items-center justify-between bg-dashboard-card rounded-2xl">
+              <h1 className="uppercase text-xl font-bold text-left text-negative ">
                 Top losers
               </h1>
               <p className="text-sm text-text-secondary">

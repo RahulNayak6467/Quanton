@@ -3,7 +3,7 @@ import Nav from "@/Components/DashboardPage/Nav";
 
 function Layout() {
   return (
-    <div className="min-h-screen bg-[#0D1117] ">
+    <div className="min-h-screen bg-dashboard-page border-dashboard-border ">
       <Nav />
       <Outlet />
     </div>

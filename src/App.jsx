@@ -70,7 +70,7 @@ function App(props) {
       element: <Layout />,
       children: [
         {
-          path: "",
+          path: "Dashboard",
           element: (
             <ProtectedRoutes>
               <Dashboard />
@@ -82,7 +82,7 @@ function App(props) {
           element: <WatchList />,
         },
         {
-          path: "StockDetail",
+          path: "",
           element: <StockDetail />,
         },
         {

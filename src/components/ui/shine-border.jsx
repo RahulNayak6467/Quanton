@@ -1,43 +1,57 @@
-import * as React from "react";
+import { X, Search } from "lucide-react";
 
-import { cn } from "@/lib/utils";
+const mockResults = [
+  { symbol: "AAPL", name: "Apple Inc.", exchange: "NASDAQ" },
+  { symbol: "AAPLC", name: "Apple Inc. CDR", exchange: "NEO" },
+  { symbol: "AAPL.BA", name: "Apple Inc.", exchange: "BCBA" },
+];
 
-/**
- * Shine Border
- *
- * An animated background border effect component with configurable properties.
- */
-export function ShineBorder({
-  borderWidth = 1,
-  duration = 14,
-  shineColor = ["blue", "#10b981"],
-  className,
-  style,
-  ...props
-}) {
+function StockDetail() {
   return (
-    <div
-      style={{
-        "--border-width": `${borderWidth}px`,
-        "--duration": `${duration}s`,
+    <section>
+      <div className="flex justify-center items-center h-15 relative">
+        <Search
+          size={20}
+          className="text-text-disabled text-center absolute left-[30%] top-[45%] cursor-pointer hover:text-text-primary"
+        />
+        <input
+          type="text"
+          placeholder="Enter your favourite stock by company name or symbol..."
+          className="text-lg text-text-disabled mt-4 border-[#30303D] rounded-full h-full focus-within:border-[#6E7681] mx-auto w-200 border-2 px-2 bg-dashboard-card focus:border-dashboard-page pl-12"
+        />
+        <X
+          size={20}
+          className="text-text-disabled absolute right-[30%] cursor-pointer hover:text-text-primary"
+        />
+      </div>
 
-        backgroundImage: `radial-gradient(transparent,transparent, ${
-          Array.isArray(shineColor) ? shineColor.join(",") : shineColor
-        },transparent,transparent)`,
-
-        backgroundSize: "300% 300%",
-        mask: `linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)`,
-        WebkitMask: `linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)`,
-        WebkitMaskComposite: "xor",
-        maskComposite: "exclude",
-        padding: "var(--border-width)",
-        ...style,
-      }}
-      className={cn(
-        "motion-safe:animate-shine pointer-events-none absolute inset-0 size-full rounded-[inherit] will-change-[background-position]",
-        className,
-      )}
-      {...props}
-    />
+      {/* Dropdown */}
+      <div className="flex justify-center">
+        <div className="w-200 rounded-b-2xl border-2 border-t-0 border-[#30303D] bg-dashboard-card overflow-hidden">
+          {mockResults.length === 0 ? (
+            <p className="text-[#8B949E] text-sm px-4 py-3">
+              No results found.
+            </p>
+          ) : (
+            mockResults.map((stock) => (
+              <div
+                key={stock.symbol}
+                className="flex items-center justify-between px-4 py-3 cursor-pointer hover:bg-[#21262D] transition-colors duration-150"
+              >
+                <div>
+                  <span className="text-white font-medium">{stock.symbol}</span>
+                  <span className="text-[#8B949E] text-sm ml-2">
+                    {stock.name}
+                  </span>
+                </div>
+                <span className="text-[#6E7681] text-xs">{stock.exchange}</span>
+              </div>
+            ))
+          )}
+        </div>
+      </div>
+    </section>
   );
 }
+
+export default StockDetail;
