@@ -5,23 +5,35 @@ import StockInfo from "@/Components/StockDetail/StockInfo";
 import StockName from "@/Components/StockDetail/StockName";
 import StockNews from "@/Components/StockDetail/StockNews";
 import StockProfile from "@/Components/StockDetail/StockProfile";
-import useStockInfo from "@/CustomHooks/useStockInfo";
+// import { useSearchContext } from "@/Context/StockSearch";
+// import useStockInfo from "@/CustomHooks/useStockInfo";
+// import useStocksSearch from "@/CustomHooks/useStocksSearch";
+import { useQuery } from "@tanstack/react-query";
 import { X, Search } from "lucide-react";
 
 function StockDetail() {
-  //   const mockResults = [
-  //     { symbol: "AAPL", name: "Apple Inc.", exchange: "NASDAQ" },
-  //     { symbol: "AAPLC", name: "Apple Inc. CDR", exchange: "NEO" },
-  //     { symbol: "AAPL.BA", name: "Apple Inc.", exchange: "BCBA" },
-  //   ];
-  //   const mockResults = [];
+  //   const { handleSearchQuery, debouncedQuery } = useSearchContext();
 
-  //   const { data: StockInfoData, isLoading } = useStockInfo();
+  //   const getData = async () => {
+  //     const response = await fetch(
+  //       `https://api.tvmaze.com/search/shows?q=${debouncedQuery}`,
+  //     );
+  //     const data = await response.json();
+
+  //     return data;
+  //   };
+
+  //   const { data, isLoading } = useQuery({
+  //     queryKey: ["DebouncedQuery", debouncedQuery],
+  //     queryFn: ({ signal }) => getData({ signal }),
+  //     staleTime: Infinity,
+  //     gcTime: 60 * 60 * 1000,
+  //     enabled: !!debouncedQuery,
+  //   });
 
   //   if (isLoading) {
-  //     return <Loader />;
+  //     return <p>Loading...</p>;
   //   }
-  //   console.log(StockInfoData);
 
   return (
     <section className="pb-20">
@@ -31,6 +43,7 @@ function StockDetail() {
           className="text-text-disabled text-center absolute left-[30%] top-[45%] cursor-pointer hover:text-text-primary"
         />
         <input
+          //   onChange={(e) => handleSearchQuery(e.target.value)}
           type="text"
           placeholder="Enter your favourite stock by company name or symbol..."
           className="text-lg text-text-disabled mt-4 border-[#30303D]  h-full focus-within:border-[#6E7681] mx-auto w-200 border-2 px-2 bg-dashboard-card focus:border-dashboard-page pl-12 rounded-full"
@@ -41,7 +54,7 @@ function StockDetail() {
         />
       </div>
 
-      <div className="flex items-stretch mt-10 gap-8 w-[90%] mx-auto">
+      <div className="flex  mt-10 gap-8 w-[90%] mx-auto">
         <StockName />
         <AnalystRating />
       </div>

@@ -1,32 +1,29 @@
+import useStockInfo from "@/CustomHooks/useStockInfo";
+
 function StockProfile() {
+  const { data: StockInfoData, isLoading } = useStockInfo();
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center">
+        <div className="w-6 h-6 border-2 border-[#30363D] border-t-green-500 rounded-full animate-spin" />
+      </div>
+    );
+  }
+  const stockData = StockInfoData[1][0];
+
   return (
-    <div className="flex-col w-[24%]  border border-dashboard-border p-6 rounded-2xl bg-dashboard-card">
+    <div className="flex-col w-[30%]  border border-dashboard-border p-6 rounded-md bg-dashboard-card">
       <div>
-        <h1 className="text-xl text-text-secondary">
-          <span className="text-accent font-bold text-lg mr-2">AAPL</span>{" "}
-          Profile
-        </h1>
+        <h1 className="text-xl text-accent">Profile</h1>
       </div>
       <div className="mt-4 text-text-secondary text-md">
-        <p>Sector: Electronic Technology</p>
-        <p>Industry: Telecommunications Equipment</p>
-        <p>Employees: 166k</p>
+        <p>Sector: {stockData?.sector}</p>
+        <p>Industry: {stockData?.industry}</p>
+        <p>Employees: {stockData?.fullTimeEmployees / 1000}K</p>
       </div>
-      <div className="mt-4 text-text-secondary text-[15px] ">
-        {" "}
-        Apple, Inc engages in the design, manufacture, and sale of smartphones,
-        personal computers, tablets, wearables and accessories, and other
-        variety of related services. It operates through the following
-        geographical segments: Americas, Europe, Greater China, Japan, and Rest
-        of Asia Pacific. The Americas segment includes North and South America.
-        The Europe segment consists of European countries, as well as India, the
-        Middle East, and Africa. The Greater China segment comprises of China,
-        Hong Kong, and Taiwan. The Rest of Asia Pacific segment includes
-        Australia and Asian countries. Its products and services include iPhone,
-        Mac, iPad, AirPods, Apple TV, Apple Watch, Beats products, Apple Care,
-        iCloud, digital content stores, streaming, and licensing services. The
-        company was founded by Steven Paul Jobs, Ronald Gerald Wayne, and
-        Stephen G. Wozniak in 1976 and is headquartered in Cupertino, CA.
+      <div className="mt-4 text-text-secondary text-sm leading-normal ">
+        {stockData?.description}
       </div>
     </div>
   );

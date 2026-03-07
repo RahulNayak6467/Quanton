@@ -23,6 +23,7 @@ import Alerts from "./Pages/Alerts";
 import Discover from "./Pages/Discover";
 import Tables from "./Components/DashboardPage/Tables";
 import LatestNews from "./Components/DashboardPage/LatestNews";
+// import SearchContextProvider from "./Context/StockSearch";
 
 const generateData = () => {
   const data = [];

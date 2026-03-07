@@ -10,12 +10,12 @@ function StockNews() {
   }
 
   return (
-    <div className="w-[76%] ">
+    <div className="w-[70%] ">
       <div className=" border border-dashboard-border bg-dashboard-card  rounded-2xl p-6">
-        <h1 className="uppercase text-xl text-text-primary border-b border-dashboard-border">
-          Lastest News
+        <h1 className="uppercase text-xl text-accent border-b border-dashboard-border">
+          Latest News
         </h1>
-        {newsData.feed.slice(5, 10).map((news, index) => (
+        {newsData.feed.slice(5, 11).map((news, index) => (
           <LatestNews data={news} index={index + 1} />
         ))}
       </div>

@@ -27,7 +27,7 @@ function LatestNews({ index, data }) {
       >
         <div className="text-text-secondary text-left w-[92%] text-[15px] leading-6 line-clamp-2">
           <span className="text-md">{index}.</span>
-          <span className="ml-1">{data?.summary}</span>
+          <span className="ml-1 text-sm">{data?.summary}</span>
         </div>
         <p className="text-sm "></p>
         <p className="mr-3 text-text-secondary">
@@ -35,7 +35,7 @@ function LatestNews({ index, data }) {
         </p>
       </a>
       <div>
-        <span className="text-left text-sm text-text-secondary">
+        <span className="text-left text-sm text-text-primary">
           {data.source} · {data.topics[0].topic}
         </span>
       </div>

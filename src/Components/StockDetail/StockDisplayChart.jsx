@@ -12,7 +12,7 @@ function StockDisplayChart() {
   }
 
   return (
-    <div className="border border-dashboard-border bg-dashboard-card p-6 h-fit rounded-2xl w-[80%] ">
+    <div className="border border-dashboard-border bg-dashboard-card p-6 h-fit rounded-md w-[80%] ">
       <div className="flex justify-between items-center">
         <div className="flex gap-4 items-center ml-6">
           <h1 className="font-extrabold text-4xl px-1 py-0.5 text-text-secondary">
