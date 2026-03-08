@@ -91,7 +91,7 @@ function Hero({ props, data }) {
         </div>*/}
       </section>
       {/* Right side - chart */}
-      <div className="flex-1 rounded-2xl border-2 border-accent shadow-[0_5px_30px_rgba(16,185,129,0.4)] p-1">
+      <div className="flex-1 rounded-2xl border-2  border-accent shadow-[0_5px_30px_rgba(16,185,129,0.4)] p-1">
         <StockChart {...props} data={data} />
       </div>
     </div>

@@ -1,7 +1,9 @@
+import { useSearchContext } from "@/Context/StockSearch";
 import useStockInfo from "@/CustomHooks/useStockInfo";
 
 function StockName() {
   const { data: StockInfoData, isLoading } = useStockInfo();
+  const { debouncedQuery } = useSearchContext();
 
   if (isLoading) {
     return (
@@ -25,7 +27,7 @@ function StockName() {
       <div className="flex gap-4 items-center">
         <div>
           <img
-            src={`https://img.logo.dev/ticker/AAPL?token=pk_c_tteg2kSPKs1fwVTFOkTg&retina=true`}
+            src={`https://img.logo.dev/ticker/${debouncedQuery ?? "APPL"}?token=pk_c_tteg2kSPKs1fwVTFOkTg&retina=true`}
             alt=""
             className="h-12 w-12 rounded-full"
           />
@@ -46,7 +48,8 @@ function StockName() {
             USD{" "}
             <span className="text-negative text-lg ml-4">
               {" "}
-              {stockData?.change} ({stockData?.changePercentage})
+              {stockData?.change.toFixed(2)} (
+              {stockData?.changePercentage.toFixed(2)}%)
             </span>
           </p>
         </div>

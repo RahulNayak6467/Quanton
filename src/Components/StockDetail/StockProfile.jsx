@@ -20,9 +20,9 @@ function StockProfile() {
       <div className="mt-4 text-text-secondary text-md">
         <p>Sector: {stockData?.sector}</p>
         <p>Industry: {stockData?.industry}</p>
-        <p>Employees: {stockData?.fullTimeEmployees / 1000}K</p>
+        <p>Employees: {(stockData?.fullTimeEmployees / 1000).toFixed(0)}K</p>
       </div>
-      <div className="mt-4 text-text-secondary text-sm leading-normal ">
+      <div className="mt-4 text-text-secondary text-sm leading-normal line-clamp-18">
         {stockData?.description}
       </div>
     </div>

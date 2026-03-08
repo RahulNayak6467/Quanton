@@ -1,9 +1,15 @@
 import LatestNews from "../DashboardPage/LatestNews";
-import useLatestNews from "@/CustomHooks/useLastestNews";
 import Loader from "../Loader";
+import useStockNews from "@/CustomHooks/useStockNews";
 
 function StockNews() {
-  const { newsData, newsLoadingData } = useLatestNews();
+  //   const { newsData, newsLoadingData } = useLatestNews();
+
+  //   if (newsLoadingData) {
+  //     return <Loader />;
+  //   }
+
+  const { data: newsData, isLoading: newsLoadingData } = useStockNews();
 
   if (newsLoadingData) {
     return <Loader />;
@@ -15,7 +21,10 @@ function StockNews() {
         <h1 className="uppercase text-xl text-accent border-b border-dashboard-border">
           Latest News
         </h1>
-        {newsData.feed.slice(5, 11).map((news, index) => (
+        {/* {newsData?.feed?.slice(0, 5)?.map((news, index) => (
+          <LatestNews data={news} index={index + 1} />
+        ))} */}
+        {newsData?.slice(0, 5).map((news, index) => (
           <LatestNews data={news} index={index + 1} />
         ))}
       </div>

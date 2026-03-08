@@ -13,10 +13,12 @@ import { useQuery } from "@tanstack/react-query";
 const apiKey = import.meta.env.VITE_FMP_API_KEY;
 
 function StockDetail() {
-  const { debouncedQuery } = useSearchContext();
-
-  const { searchQuery, handleSearchQuery, handleDebouncedQuery } =
-    useSearchContext();
+  const {
+    debouncedQuery,
+    searchQuery,
+    handleSearchQuery,
+    handleDebouncedQuery,
+  } = useSearchContext();
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -49,16 +51,16 @@ function StockDetail() {
   const fetchSuggestions = async () => {
     try {
       const response = await fetch(
-        `https://financialmodelingprep.com/stable/search-name?query=${debouncedQuery || "MSFT"}&limit=8&apikey=${apiKey}`,
+        `https://financialmodelingprep.com/stable/search-name?query=${debouncedQuery || "microsoft"}&limit=8&apikey=${apiKey}`,
       );
 
       if (!response.ok) {
-        // console.log("An error occured", response.status);
+        console.log("An error occured", response.status);
       }
 
       const data = await response.json();
 
-      // console.log(data);
+      console.log(data);
 
       return data;
     } catch (error) {
@@ -69,14 +71,16 @@ function StockDetail() {
   const { data: suggestionsData, isLoading: suggestionsLoading } = useQuery({
     queryKey: ["fetchSuggestions", debouncedQuery],
     queryFn: () => fetchSuggestions(),
-    staleTime: Infinity,
+    // staleTime: Infinity,
     gcTime: 60 * 60 * 1000,
-    enabled: !!debouncedQuery,
+    // enabled: !!debouncedQuery,
   });
 
   if (suggestionsLoading) {
     return;
   }
+
+  console.log(suggestionsData);
 
   // console.log(suggestionsLoading);
 

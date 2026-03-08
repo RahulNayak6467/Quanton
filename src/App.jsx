@@ -23,6 +23,7 @@ import Alerts from "./Pages/Alerts";
 import Discover from "./Pages/Discover";
 import Tables from "./Components/DashboardPage/Tables";
 import LatestNews from "./Components/DashboardPage/LatestNews";
+import SearchContextProvider from "./Context/StockSearch";
 // import SearchContextProvider from "./Context/StockSearch";
 
 const generateData = () => {
@@ -30,7 +31,7 @@ const generateData = () => {
   let value = 150;
   const startDate = new Date("2023-01-01");
 
-  for (let i = 0; i < 25; i++) {
+  for (let i = 0; i < 365; i++) {
     const date = new Date(startDate);
     date.setDate(startDate.getDate() + i);
 
@@ -71,10 +72,12 @@ function App(props) {
       element: <Layout />,
       children: [
         {
-          path: "Dashboard",
+          path: "",
           element: (
             <ProtectedRoutes>
-              <Dashboard />
+              <SearchContextProvider>
+                <Dashboard />
+              </SearchContextProvider>
             </ProtectedRoutes>
           ),
         },
@@ -83,8 +86,12 @@ function App(props) {
           element: <WatchList />,
         },
         {
-          path: "",
-          element: <StockDetail />,
+          path: "StockDetail",
+          element: (
+            <SearchContextProvider>
+              <StockDetail />,
+            </SearchContextProvider>
+          ),
         },
         {
           path: "Alerts",

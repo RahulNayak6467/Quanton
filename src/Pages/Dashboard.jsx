@@ -10,16 +10,17 @@ import useStockPeriod from "@/CustomHooks/useStockPeriod";
 import Tables from "@/Components/DashboardPage/Tables";
 import useTopCategories from "@/CustomHooks/useTopCategory";
 import LatestNews from "@/Components/DashboardPage/LatestNews";
-import useLatestNews from "@/CustomHooks/useLastestNews";
+import useStockNews from "@/CustomHooks/useStockNews";
 
 function Dashboard() {
   const { stockData, isLoading } = useStockData();
   const { data, isLoadingChart } = useStockHistory();
   const { candleStickData, HistoryLoader, currentBtn, handleCheckHistory } =
-    useStockPeriod();
+    useStockPeriod("^IXIC");
   const { PositiveGain, NegativeGain, positiveLoading, negativeLoading } =
     useTopCategories();
-  const { newsData, newsLoadingData } = useLatestNews();
+  //   const { newsData, newsLoadingData } = useLatestNews();
+  const { data: newsData, isLoading: newsLoadingData } = useStockNews();
 
   //   if (newsLoadingData) {
   //     return <loader />;
@@ -44,10 +45,10 @@ function Dashboard() {
       </div>
     );
   }
-  //   console.log(newsData);
+  console.log(newsData);
 
   return (
-    <section className="py-6">
+    <section className="py-6 pb-50">
       <div className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 px-20 ">
         <MiniChart
           stockData={stockData[0][0]}
@@ -179,22 +180,16 @@ function Dashboard() {
               </div>
             </div>
           </div>
-          <div className="border-2 border-dashboard-border  h-110  rounded-xl mt-4">
+          {/* <div className="border-2 border-dashboard-border    rounded-xl mt-4">
             <div className="border-b border-b-dashboard-border bg-dashboard-card px-6 py-4 rounded-2xl">
               <h1 className="text-positive text-3xl  uppercase font-bold border-b border-b-[#21262D] ">
                 Latest News
               </h1>
-              {/* {newsData.feed.slice(0, 5).map((news, index) => (
-                <LatestNews data={news} index={index + 1} timeAgo={timeAgo} />
-              ))} */}
-              {/* {dummyNews.map((news, index) => (
-                <LatestNews data={news} index={index + 1} />
-              ))} */}
-              {newsData.feed.slice(5, 10).map((news, index) => (
+              {newsData?.slice(0, 5)?.map((news, index) => (
                 <LatestNews data={news} index={index + 1} />
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="grid grid-cols-1 gap-y-4 col-span-5">
           <div className="border-2 border-dashboard-border h-fit rounded-xl -ml-1">
