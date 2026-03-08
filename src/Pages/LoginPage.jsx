@@ -16,13 +16,13 @@ function LoginPage() {
       email: userData.email,
       password: userData.password,
     };
-    console.log(userInfo);
+    // console.log(userInfo);
     const { error } = await supabase.auth.signInWithPassword(userInfo);
     if (error) {
-      console.log(error.message);
+      // console.log(error.message);
       return;
     }
-    console.log("Users can navigate now");
+    // console.log("Users can navigate now");
     navigate("/dashboard");
   };
 

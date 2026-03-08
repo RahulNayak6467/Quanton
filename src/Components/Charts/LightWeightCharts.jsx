@@ -23,7 +23,7 @@ function StockChart(props) {
   } = props;
 
   const chartContainer = useRef();
-  console.log(color);
+  // console.log(color);
 
   useEffect(() => {
     const handleResize = () => {

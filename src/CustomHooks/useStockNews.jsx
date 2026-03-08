@@ -1,26 +1,56 @@
+import { useSearchContext } from "@/Context/StockSearch";
 import { useQuery } from "@tanstack/react-query";
 
+const finhubbApiKey = import.meta.env.VITE_FINNHUB_API_KEY;
+
 function useStockNews() {
-  const alphaVantageApiKey = import.meta.env.VITE_ALPHA_VANTAGE_API_KEY;
+  //   const now = new Date();
+  //   const to = now.toISOString().split("T")[0];
+  //   const from = new Date(now - 5 * 24 * 60 * 60 * 1000)
+  //     .toISOString()
+  //     .split("T")[0]
+  //     .toISOString()
+  //     .split("T")[0];
 
-  const fetchNews = async () => {
-    const response = await fetch(`
-     https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=AAPL&limit=10&apikey=${alphaVantageApiKey}`);
-    const data = await response.json();
+  const now = new Date();
+  const to = now.toISOString().split("T")[0];
+  const from = new Date(now - 5 * 24 * 60 * 60 * 1000)
+    .toISOString()
+    .split("T")[0];
 
-    console.log(data);
+  const { debouncedQuery } = useSearchContext();
 
-    return data;
+  // console.log(debouncedQuery);
+
+  const fetchStockNews = async () => {
+    // console.log(debouncedQuery);
+    try {
+      const response = await fetch(
+        `https://finnhub.io/api/v1/company-news?symbol=${debouncedQuery || "AAPL"}&from=${from}&to=${to}&token=${finhubbApiKey}`,
+      );
+
+      if (!response.ok) {
+        console.log("An error occured", response.status);
+      }
+      const data = await response.json();
+
+      // console.log(data);
+
+      return data;
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
-  const { data: newsData, isLoading: newsLoadingData } = useQuery({
-    queryKey: ["latestNews"],
-    queryFn: () => fetchNews(),
+  const { data, isLoading } = useQuery({
+    queryKey: ["FetchStockNews", debouncedQuery],
+    queryFn: () => fetchStockNews(),
     staleTime: Infinity,
     gcTime: 60 * 60 * 1000,
+    enabled: !!debouncedQuery,
   });
 
-  return { newsData, newsLoadingData };
+  return { data, isLoading };
 }
 
 export default useStockNews;

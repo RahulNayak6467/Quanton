@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { useSearchContext } from "@/Context/StockSearch";
 
-function useStockPeriod(stocksSymbol) {
+function useStockChart() {
+  const { debouncedQuery } = useSearchContext();
   const [checkHistory, setCheckHistory] = useState(300);
   const [currentBtn, setCurrentBtn] = useState(4);
 
@@ -10,7 +12,7 @@ function useStockPeriod(stocksSymbol) {
     setCurrentBtn(currentBtnNumber);
   };
 
-  const fetchHistoryData = async (checkHistory) => {
+  const fetchStockHistoryData = async (checkHistory) => {
     const to = new Date().toISOString().split("T")[0];
     const from = new Date();
     from.setDate(from.getDate() - Math.trunc(checkHistory % 30));
@@ -19,7 +21,7 @@ function useStockPeriod(stocksSymbol) {
     const fromStr = from.toISOString().split("T")[0];
     try {
       const response = await fetch(
-        ` https://financialmodelingprep.com/stable/historical-price-eod/full?symbol=^IXIC&from=${fromStr}&to=${to}&apikey=${import.meta.env.VITE_FMP_API_KEY}`,
+        ` https://financialmodelingprep.com/stable/historical-price-eod/full?symbol=${debouncedQuery || "AAPL"}&from=${fromStr}&to=${to}&apikey=${import.meta.env.VITE_FMP_API_KEY}`,
       );
 
       if (!response.ok) {
@@ -41,16 +43,17 @@ function useStockPeriod(stocksSymbol) {
     }
   };
 
-  const { data: candleStickData, isLoading: HistoryLoader } = useQuery({
-    queryKey: ["getIndexHistory", checkHistory],
-    queryFn: () => fetchHistoryData(checkHistory),
+  const { data: chartData, isLoading: chartLoader } = useQuery({
+    queryKey: ["getStockHistory", checkHistory, debouncedQuery],
+    queryFn: () => fetchStockHistoryData(checkHistory),
     staleTime: Infinity,
     gcTime: 1000 * 60 * 60, // keep in cache for 1 hour
     retry: false, // disable auto retry
     refetchOnWindowFocus: false,
+    enabled: !!debouncedQuery,
   });
 
-  return { candleStickData, HistoryLoader, currentBtn, handleCheckHistory };
+  return { chartData, chartLoader, currentBtn, handleCheckHistory };
 }
 
-export default useStockPeriod;
+export default useStockChart;

@@ -25,7 +25,7 @@ function useStockHistory() {
 
     const data = await Promise.all(res.map((r) => r.json()));
 
-    console.log(data);
+    // console.log(data);
 
     const requiredData = data.map((el) =>
       el.reverse().map((d) => {
@@ -36,7 +36,7 @@ function useStockHistory() {
       }),
     );
 
-    console.log(requiredData);
+    // console.log(requiredData);
     // console.log(candlestickSeries);
     return requiredData;
   };

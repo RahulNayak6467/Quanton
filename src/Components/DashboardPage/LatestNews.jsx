@@ -15,28 +15,30 @@ function LatestNews({ index, data }) {
     if (minutes > 0) return `${minutes}m ago`;
     return `${seconds}s ago`;
   };
-  console.log(timeAgo("20260304T145249"));
-  console.log(typeof 4);
-  console.log(typeof data?.time_published);
+  // console.log(data.datetime);
+  const time = new Date(data.datetime * 1000).toISOString().split("T")[0];
+
+  // console.log(time);
   return (
-    <div className="text-text-primary   hover:bg-[#161B22] cursor-pointer py-3 rounded-2xl">
+    <div className="text-text-primary    hover:bg-[#161B22] cursor-pointer py-3 rounded-2xl">
       <a
         href={data.url}
         target="blank"
         className="flex justify-between items-center "
       >
-        <div className="text-text-secondary text-left w-[92%] text-[15px] leading-6 line-clamp-2">
+        <div className="text-text-secondary text-left w-[85%] text-[15px] leading-6 line-clamp-2">
           <span className="text-md">{index}.</span>
           <span className="ml-1 text-sm">{data?.summary}</span>
         </div>
         <p className="text-sm "></p>
         <p className="mr-3 text-text-secondary">
-          {timeAgo(String(data?.time_published))}
+          {/* {timeAgo(String(data?.datetime))} */}
+          {time}
         </p>
       </a>
       <div>
         <span className="text-left text-sm text-text-primary">
-          {data.source} · {data.topics[0].topic}
+          {data.source}
         </span>
       </div>
       <div className="mt-2 border-b border-b-dashboard-border w-full"></div>

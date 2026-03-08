@@ -8,7 +8,7 @@ function StockInfo() {
     return <Loader />;
   }
 
-  console.log(StockInfoData);
+  // console.log(StockInfoData);
 
   return (
     <div className="border border-dashboard-border rounded-md bg-dashboard-card  p-5 w-100 flex flex-col gap-4">

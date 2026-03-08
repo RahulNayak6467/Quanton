@@ -42,7 +42,7 @@ function SignUp() {
     };
     const { error } = await supabase.auth.signUp(userInfo);
     if (error) {
-      console.log(error.message);
+      // console.log(error.message);
       return;
     }
     navigate("/dashboard");
