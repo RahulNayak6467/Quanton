@@ -16,7 +16,7 @@ function Tables({ color, increasing, data, isLoading }) {
     return <Loader />;
   }
   return (
-    <Table className=" mx-auto h-120 bg-dashboard-card ">
+    <Table className=" mx-auto h-140 bg-dashboard-card p-2">
       <TableHeader>
         <TableRow>
           <TableHead className="border-r border-t border-t-dashboard-border  text-text-secondary text-xs border-r-dashboard-border uppercase">

@@ -7,7 +7,7 @@ function useTopCategories() {
       `https://financialmodelingprep.com/stable/biggest-gainers?apikey=${apiKey}`,
     );
     const data = await response.json();
-    const topGainers = data.slice(0, 5);
+    const topGainers = data.slice(0, 6);
 
     return topGainers;
   };
@@ -24,7 +24,7 @@ function useTopCategories() {
       `https://financialmodelingprep.com/stable/biggest-losers?apikey=${apiKey}`,
     );
     const data = await response.json();
-    const topGainers = data.slice(0, 5);
+    const topGainers = data.slice(0, 6);
 
     return topGainers;
   };

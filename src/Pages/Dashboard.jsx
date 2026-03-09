@@ -180,7 +180,7 @@ function Dashboard() {
               </div>
             </div>
           </div>
-          {/* <div className="border-2 border-dashboard-border    rounded-xl mt-4">
+          <div className="border-2 border-dashboard-border    rounded-xl mt-4">
             <div className="border-b border-b-dashboard-border bg-dashboard-card px-6 py-4 rounded-2xl">
               <h1 className="text-positive text-3xl  uppercase font-bold border-b border-b-[#21262D] ">
                 Latest News
@@ -189,7 +189,7 @@ function Dashboard() {
                 <LatestNews data={news} index={index + 1} />
               ))}
             </div>
-          </div> */}
+          </div>
         </div>
         <div className="grid grid-cols-1 gap-y-4 col-span-5">
           <div className="border-2 border-dashboard-border h-fit rounded-xl -ml-1">
