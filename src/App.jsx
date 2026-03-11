@@ -26,8 +26,6 @@ import LatestNews from "./Components/DashboardPage/LatestNews";
 import SearchContextProvider from "./Context/StockSearch";
 // import SearchContextProvider from "./Context/StockSearch";
 
-console.log(import.meta.env.VITE_FMP_API_KEY);
-
 const generateData = () => {
   const data = [];
   let value = 150;

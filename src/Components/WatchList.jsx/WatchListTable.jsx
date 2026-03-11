@@ -14,177 +14,31 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import useWatchList from "@/CustomHooks/CustomSupabaseHooks/useWatchList";
+import { useQuery } from "@tanstack/react-query";
+
 import {
   MoreHorizontalIcon,
   TrendingUp,
   TrendingDown,
   Trash2,
 } from "lucide-react";
-
-const watchlist = [
-  {
-    symbol: "AAPL",
-    name: "Apple Inc.",
-    price: 257.46,
-    change: -2.83,
-    changePercentage: -1.09,
-    exchange: "NASDAQ",
-  },
-  {
-    symbol: "MSFT",
-    name: "Microsoft Corporation",
-    price: 408.96,
-    change: 2.21,
-    changePercentage: 0.54,
-    exchange: "NASDAQ",
-  },
-  {
-    symbol: "GOOGL",
-    name: "Alphabet Inc.",
-    price: 298.52,
-    change: -0.68,
-    changePercentage: -0.23,
-    exchange: "NASDAQ",
-  },
-  {
-    symbol: "NVDA",
-    name: "NVIDIA Corporation",
-    price: 177.82,
-    change: 3.67,
-    changePercentage: 2.11,
-    exchange: "NASDAQ",
-  },
-  {
-    symbol: "META",
-    name: "Meta Platforms Inc.",
-    price: 644.86,
-    change: 8.52,
-    changePercentage: 1.34,
-    exchange: "NASDAQ",
-  },
-  {
-    symbol: "AMZN",
-    name: "Amazon.com Inc.",
-    price: 198.63,
-    change: -1.23,
-    changePercentage: -0.62,
-    exchange: "NASDAQ",
-  },
-  {
-    symbol: "TSLA",
-    name: "Tesla Inc.",
-    price: 396.73,
-    change: -8.82,
-    changePercentage: -2.17,
-    exchange: "NASDAQ",
-  },
-  {
-    symbol: "BRK.B",
-    name: "Berkshire Hathaway",
-    price: 483.21,
-    change: 1.45,
-    changePercentage: 0.3,
-    exchange: "NYSE",
-  },
-  {
-    symbol: "JPM",
-    name: "JPMorgan Chase",
-    price: 234.56,
-    change: 3.12,
-    changePercentage: 1.35,
-    exchange: "NYSE",
-  },
-  {
-    symbol: "JNJ",
-    name: "Johnson & Johnson",
-    price: 152.34,
-    change: -0.87,
-    changePercentage: -0.57,
-    exchange: "NYSE",
-  },
-  {
-    symbol: "V",
-    name: "Visa Inc.",
-    price: 312.45,
-    change: 1.98,
-    changePercentage: 0.64,
-    exchange: "NYSE",
-  },
-  {
-    symbol: "WMT",
-    name: "Walmart Inc.",
-    price: 98.76,
-    change: 0.54,
-    changePercentage: 0.55,
-    exchange: "NYSE",
-  },
-  {
-    symbol: "XOM",
-    name: "Exxon Mobil Corporation",
-    price: 108.43,
-    change: -1.12,
-    changePercentage: -1.02,
-    exchange: "NYSE",
-  },
-  {
-    symbol: "UNH",
-    name: "UnitedHealth Group",
-    price: 512.67,
-    change: 4.32,
-    changePercentage: 0.85,
-    exchange: "NYSE",
-  },
-  {
-    symbol: "MA",
-    name: "Mastercard Inc.",
-    price: 498.32,
-    change: 2.67,
-    changePercentage: 0.54,
-    exchange: "NYSE",
-  },
-  {
-    symbol: "PG",
-    name: "Procter & Gamble",
-    price: 162.54,
-    change: -0.43,
-    changePercentage: -0.26,
-    exchange: "NYSE",
-  },
-  {
-    symbol: "HD",
-    name: "Home Depot Inc.",
-    price: 387.21,
-    change: 3.45,
-    changePercentage: 0.9,
-    exchange: "NYSE",
-  },
-  {
-    symbol: "BAC",
-    name: "Bank of America",
-    price: 43.67,
-    change: 0.32,
-    changePercentage: 0.74,
-    exchange: "NYSE",
-  },
-  {
-    symbol: "DIS",
-    name: "Walt Disney Company",
-    price: 112.34,
-    change: -1.56,
-    changePercentage: -1.37,
-    exchange: "NYSE",
-  },
-  {
-    symbol: "NFLX",
-    name: "Netflix Inc.",
-    price: 698.45,
-    change: 12.34,
-    changePercentage: 1.8,
-    exchange: "NASDAQ",
-  },
-];
+import Loader from "../Loader";
 
 function WatchListTable() {
+  const { data: watchlistData, isLoading, isError } = useWatchList();
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center">
+        <div className="w-6 h-6 border-2 border-[#30363D] border-t-green-500 rounded-full animate-spin" />
+      </div>
+    );
+  }
+  if (isError) {
+    return <h1>Error...</h1>;
+  }
+
+  const watchListStock = Object.values(watchlistData);
   return (
     <Table className="w-7xl mx-auto text-text-primary">
       <TableHeader>
@@ -200,7 +54,7 @@ function WatchListTable() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {watchlist.map((stock) => (
+        {watchListStock.map((stock) => (
           <TableRow
             key={stock.symbol}
             className=" hover:bg-[#161B22] transition-all cursor-pointer"
@@ -218,26 +72,28 @@ function WatchListTable() {
             </TableCell>
             <TableCell className="text-[#8B949E]">{stock.name}</TableCell>
             <TableCell className="text-text-primary font-medium">
-              ${stock.price.toFixed(2)}
+              ${Number(stock.close).toFixed(2)}
             </TableCell>
             <TableCell
-              className={stock.change > 0 ? "text-green-400" : "text-red-400"}
+              className={
+                Number(stock.change) > 0 ? "text-green-400" : "text-red-400"
+              }
             >
-              {stock.change > 0 ? "+" : ""}
-              {stock.change.toFixed(2)}
+              {Number(stock.change) > 0 ? "+" : ""}
+              {Number(stock.change).toFixed(2)}
             </TableCell>
             <TableCell>
               <div
-                className={`flex items-center justify-between gap-1 ${stock.changePercentage > 0 ? "text-green-400" : "text-red-400"}`}
+                className={`flex items-center justify-between gap-1 ${Number(stock.percent_change) > 0 ? "text-green-400" : "text-red-400"}`}
               >
                 <div className="text-center w-full flex items-center justify-center gap-2">
-                  {stock.changePercentage > 0 ? (
+                  {Number(stock.percent_change) > 0 ? (
                     <TrendingUp size={14} />
                   ) : (
                     <TrendingDown size={14} />
                   )}
-                  {stock.changePercentage > 0 ? "+" : ""}
-                  {stock.changePercentage.toFixed(2)}%
+                  {Number(stock.percent_change) > 0 ? "+" : ""}
+                  {Number(stock.percent_change).toFixed(2)}%
                 </div>
               </div>
             </TableCell>
