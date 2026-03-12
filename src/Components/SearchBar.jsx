@@ -1,10 +1,28 @@
 import { useEffect, useRef, useState } from "react";
 import { Search, X } from "lucide-react";
+import { useAddWatchList } from "@/Context/AddWatchListStocks";
+import { supabase } from "@/Supabase-client/SupabaseClient";
 
 function SearchBar({ onSubmit, onClose }) {
-  const [value, setValue] = useState("");
+  //   const [value, setValue] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const inputRef = useRef(null);
+  const { addStockSymbol, handleAddStock } = useAddWatchList();
+
+  const AddWatchListStocks = async () => {
+    const { data, error } = await supabase
+      .from("WatchList")
+      .insert({ Symbol: addStockSymbol })
+      .single();
+
+    if (error) {
+      throw new Error("The Stock Symbol is not availables");
+    }
+
+    console.log(data);
+
+    return data;
+  };
 
   useEffect(() => {
     if (inputRef.current) {
@@ -14,7 +32,8 @@ function SearchBar({ onSubmit, onClose }) {
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      if (onSubmit) onSubmit(value.trim());
+      if (onSubmit) onSubmit(addStockSymbol.trim());
+      AddWatchListStocks();
     }
 
     if (e.key === "Escape") {
@@ -23,7 +42,7 @@ function SearchBar({ onSubmit, onClose }) {
   };
 
   const handleClear = () => {
-    setValue("");
+    handleAddStock("");
     if (inputRef.current) {
       inputRef.current.focus();
     }
@@ -33,8 +52,8 @@ function SearchBar({ onSubmit, onClose }) {
     <div className="flex justify-center items-center h-15 relative w-full">
       <input
         ref={inputRef}
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
+        value={addStockSymbol}
+        onChange={(e) => handleAddStock(e.target.value)}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
         onKeyDown={handleKeyDown}
@@ -46,7 +65,7 @@ function SearchBar({ onSubmit, onClose }) {
             : "outline-none text-lg text-text-disabled mt-4 h-12 mx-auto w-full border-2 border-white px-4 bg-dashboard-card pl-10 rounded-full focus:border-dashboard-page"
         }
       />
-      {value && (
+      {addStockSymbol && (
         <button
           type="button"
           onClick={handleClear}

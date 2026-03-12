@@ -3,6 +3,7 @@ import { useSearchContext } from "@/Context/StockSearch";
 import useStockInfo from "@/CustomHooks/useStockInfo";
 import WatchListStar from "../WatchList.jsx/WatchListStar";
 import useWatchList from "@/CustomHooks/CustomSupabaseHooks/useWatchList";
+import { supabase } from "@/Supabase-client/SupabaseClient";
 
 function StockName() {
   const { data: StockInfoData, isLoading } = useStockInfo();
@@ -30,7 +31,24 @@ function StockName() {
   // → "Dec 12, 1980"
 
   const checkWatchList = stockSymbol.some((el) => el === debouncedQuery);
-  console.log(checkWatchList);
+
+  const addStockDataWatchList = async (symbol) => {
+    if (stockSymbol.some((el) => el === symbol)) {
+      return;
+    }
+    const { data, error } = await supabase
+      .from("WatchList")
+      .insert({ Symbol: symbol })
+      .single();
+
+    if (error) {
+      throw new Error("An error occured");
+    }
+
+    console.log(data);
+
+    return data;
+  };
 
   return (
     <div className="border-2 border-dashboard-border bg-dashboard-card  p-6  w-[35%] rounded-md  ">
@@ -73,7 +91,9 @@ function StockName() {
             </span>
             (as of 00:17 GMT+5:30){" "}
           </p>
-          <WatchListStar size={18} isInList={checkWatchList} />
+          <div onClick={() => addStockDataWatchList(stockData?.symbol)}>
+            <WatchListStar size={18} isInList={checkWatchList} />
+          </div>
         </div>
       </div>
       <div className="flex gap-4 mt-4">
