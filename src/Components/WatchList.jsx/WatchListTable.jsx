@@ -24,6 +24,7 @@ import {
   Trash2,
 } from "lucide-react";
 import Loader from "../Loader";
+import { supabase } from "@/Supabase-client/SupabaseClient";
 
 function WatchListTable() {
   const { data: watchlistData, isLoading, isError } = useWatchList();
@@ -39,6 +40,18 @@ function WatchListTable() {
   }
 
   const watchListStock = Object.values(watchlistData);
+
+  const deleteFromWatchList = async (stock) => {
+    const { data, error } = await supabase
+      .from("WatchList")
+      .delete()
+      .eq("Symbol", stock.symbol);
+    if (error) {
+      throw new Error("An error occured");
+    }
+    console.log(data);
+  };
+
   return (
     <Table className="w-7xl mx-auto text-text-primary">
       <TableHeader>
@@ -116,6 +129,7 @@ function WatchListTable() {
               </DropdownMenu> */}
               <div className="mx-auto ">
                 <Trash2
+                  onClick={() => deleteFromWatchList(stock)}
                   size={18}
                   className="relative left-[35%] cursor-pointer opacity-80 hover:opacity-100"
                 />

@@ -1,17 +1,25 @@
+import { useEffect, useState } from "react";
 import { useSearchContext } from "@/Context/StockSearch";
 import useStockInfo from "@/CustomHooks/useStockInfo";
+import WatchListStar from "../WatchList.jsx/WatchListStar";
+import useWatchList from "@/CustomHooks/CustomSupabaseHooks/useWatchList";
 
 function StockName() {
   const { data: StockInfoData, isLoading } = useStockInfo();
   const { debouncedQuery } = useSearchContext();
 
-  if (isLoading) {
+  //   const [isInWatchList, setIsInWatchList] = useState(false);
+  const { data: watchlistData, isLoading: watchListLoading } = useWatchList();
+
+  if (isLoading || watchListLoading) {
     return (
       <div className="flex items-center justify-center">
         <div className="w-6 h-6 border-2 border-[#30363D] border-t-green-500 rounded-full animate-spin" />
       </div>
     );
   }
+
+  const stockSymbol = Object.keys(watchlistData);
   const stockData = StockInfoData[1][0];
 
   const ipoDate = new Date(stockData?.ipoDate).toLocaleDateString("en-US", {
@@ -21,22 +29,27 @@ function StockName() {
   });
   // → "Dec 12, 1980"
 
+  const checkWatchList = stockSymbol.some((el) => el === debouncedQuery);
+  console.log(checkWatchList);
+
   return (
     <div className="border-2 border-dashboard-border bg-dashboard-card  p-6  w-[35%] rounded-md  ">
       {/* // <div className="border-2 border-dashboard-border p-6 mt-10 w rounded-md w-[90%] mx-auto "> */}
-      <div className="flex gap-4 items-center">
-        <div>
-          <img
-            src={`https://img.logo.dev/ticker/${debouncedQuery ?? "APPL"}?token=pk_c_tteg2kSPKs1fwVTFOkTg&retina=true`}
-            alt=""
-            className="h-12 w-12 rounded-full"
-          />
-        </div>
-        <div className="flex-col">
-          <p className="text-text-secondary text-4xl">{stockData?.symbol}</p>
-          <p className="text-text-disabled text-md">
-            {stockData?.companyName} Nasdaq Stock Market
-          </p>
+      <div className="flex justify-between items-center">
+        <div className="flex gap-4 items-center">
+          <div>
+            <img
+              src={`https://img.logo.dev/ticker/${debouncedQuery ?? "APPL"}?token=pk_c_tteg2kSPKs1fwVTFOkTg&retina=true`}
+              alt=""
+              className="h-12 w-12 rounded-full"
+            />
+          </div>
+          <div className="flex-col">
+            <p className="text-text-secondary text-4xl">{stockData?.symbol}</p>
+            <p className="text-text-disabled text-md">
+              {stockData?.companyName} Nasdaq Stock Market
+            </p>
+          </div>
         </div>
       </div>
       <div className="flex-col mt-6">
@@ -53,13 +66,14 @@ function StockName() {
             </span>
           </p>
         </div>
-        <div>
+        <div className="flex items-center gap-4">
           <p className="text-xs text-text-secondary">
             <span className="uppercase text-accent text-[10px] mr-2">
               Market Open
             </span>
             (as of 00:17 GMT+5:30){" "}
           </p>
+          <WatchListStar size={18} isInList={checkWatchList} />
         </div>
       </div>
       <div className="flex gap-4 mt-4">

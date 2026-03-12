@@ -10,11 +10,22 @@ import {
 } from "@/components/ui/table";
 import Loader from "../Loader";
 import { TrendingDown, TrendingUp } from "lucide-react";
+import WatchListStar from "../WatchList.jsx/WatchListStar";
+import useWatchList from "@/CustomHooks/CustomSupabaseHooks/useWatchList";
 
 function Tables({ color, increasing, data, isLoading }) {
-  if (isLoading) {
+  const { data: watchlistData, isLoading: watchListLoading } = useWatchList();
+  if (isLoading || watchListLoading) {
     return <Loader />;
   }
+
+  const stockSymbol = Object.keys(watchlistData);
+
+  //   const checkWatchList = stockSymbol.some((el) => el === );
+  const handleStockWatchList = (stock) => {
+    return stockSymbol.some((el) => el === stock.symbol);
+  };
+
   return (
     <Table className=" mx-auto h-140 bg-dashboard-card p-2">
       <TableHeader>
@@ -30,6 +41,9 @@ function Tables({ color, increasing, data, isLoading }) {
           </TableHead>
           <TableHead className="border-r border-t  border-t-dashboard-border   text-text-secondary text-xs border-r-dashboard-border  uppercase">
             Change
+          </TableHead>
+          <TableHead className="border-r border-t  border-t-dashboard-border   text-text-secondary text-xs border-r-dashboard-border  uppercase">
+            WatchList
           </TableHead>
         </TableRow>
       </TableHeader>
@@ -63,6 +77,15 @@ function Tables({ color, increasing, data, isLoading }) {
               ) : (
                 <TrendingDown size={16} className={color} />
               )}
+            </TableCell>
+            <TableCell className="border-r  text-text-secondary text-center border-r-dashboard-border cursor-pointer">
+              <div className="flex justify-center">
+                <WatchListStar
+                  size={24}
+                  isInList={handleStockWatchList(gainers.symbol)}
+                  className=""
+                />
+              </div>
             </TableCell>
           </TableRow>
         ))}

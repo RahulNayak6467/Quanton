@@ -24,6 +24,7 @@ import Discover from "./Pages/Discover";
 import Tables from "./Components/DashboardPage/Tables";
 import LatestNews from "./Components/DashboardPage/LatestNews";
 import SearchContextProvider from "./Context/StockSearch";
+import WatchListContextProvider from "./Context/AddWatchListStocks";
 // import SearchContextProvider from "./Context/StockSearch";
 
 const generateData = () => {
@@ -83,7 +84,13 @@ function App(props) {
         },
         {
           path: "WatchList",
-          element: <WatchList />,
+          element: (
+            <ProtectedRoutes>
+              <WatchListContextProvider>
+                <WatchList />
+              </WatchListContextProvider>
+            </ProtectedRoutes>
+          ),
         },
         {
           path: "StockDetail",
