@@ -34,8 +34,20 @@ function StockName() {
 
   const addStockDataWatchList = async (symbol) => {
     if (stockSymbol.some((el) => el === symbol)) {
-      return;
+      const { data, error } = await supabase
+        .from("WatchList")
+        .delete()
+        .eq("Symbol", symbol);
+
+      if (error) {
+        throw new Error(
+          "An error occured while removing stocks from watchlist",
+        );
+      }
+
+      return data;
     }
+
     const { data, error } = await supabase
       .from("WatchList")
       .insert({ Symbol: symbol })
