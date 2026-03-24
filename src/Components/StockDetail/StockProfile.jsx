@@ -4,11 +4,7 @@ function StockProfile() {
   const { data: StockInfoData, isLoading } = useStockInfo();
 
   if (isLoading) {
-    return (
-      <div className="flex items-center justify-center">
-        <div className="w-6 h-6 border-2 border-[#30363D] border-t-green-500 rounded-full animate-spin" />
-      </div>
-    );
+    return <></>;
   }
   const stockData = StockInfoData[1][0];
 

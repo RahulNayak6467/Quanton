@@ -19,8 +19,7 @@ import AuthProvider from "./Context/AuthContext";
 import Layout from "./Pages/Layout";
 import WatchList from "./Pages/WatchList";
 import StockDetail from "./Pages/StockDetail";
-import Alerts from "./Pages/Alerts";
-import Discover from "./Pages/Discover";
+
 import Tables from "./Components/DashboardPage/Tables";
 import LatestNews from "./Components/DashboardPage/LatestNews";
 import SearchContextProvider from "./Context/StockSearch";
@@ -99,14 +98,6 @@ function App(props) {
               <StockDetail />,
             </SearchContextProvider>
           ),
-        },
-        {
-          path: "Alerts",
-          element: <Alerts />,
-        },
-        {
-          path: "Discover",
-          element: <Discover />,
         },
       ],
     },

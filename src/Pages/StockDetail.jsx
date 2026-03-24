@@ -172,32 +172,6 @@ function StockDetail() {
         <StockNews />
         <StockProfile />
       </div>
-
-      {/* Dropdown */}
-      {/* <div className="flex justify-center">
-        <div className="w-200 rounded-b-2xl border-2 border-t-0 border-[#30303D] bg-dashboard-card overflow-hidden">
-          {suggestionsData?.length === 0 ? (
-            <p className="text-[#8B949E] text-sm px-4 py-3">
-              No results found.
-            </p>
-          ) : (
-            suggestionsData?.map((stock) => (
-              <div
-                key={stock.symbol}
-                className="flex items-center justify-between px-4 py-3 cursor-pointer hover:bg-[#21262D] transition-colors duration-150"
-              >
-                <div>
-                  <span className="text-white font-medium">{stock.symbol}</span>
-                  <span className="text-[#8B949E] text-sm ml-2">
-                    {stock.name}
-                  </span>
-                </div>
-                <span className="text-[#6E7681] text-xs">{stock.exchange}</span>
-              </div>
-            ))
-          )}
-        </div>
-      </div> */}
     </section>
   );
 }

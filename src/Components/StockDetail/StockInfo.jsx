@@ -5,7 +5,7 @@ function StockInfo() {
   const { data: StockInfoData, isLoading } = useStockInfo();
 
   if (isLoading) {
-    return <Loader />;
+    return <></>;
   }
 
   // console.log(StockInfoData);

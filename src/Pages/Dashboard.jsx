@@ -8,7 +8,7 @@ import useStockData from "@/CustomHooks/UseStockData";
 import useStockHistory from "@/CustomHooks/useStockHistory";
 import useStockPeriod from "@/CustomHooks/useStockPeriod";
 import Tables from "@/Components/DashboardPage/Tables";
-import useTopCategories from "@/CustomHooks/useTopCategory";
+
 import LatestNews from "@/Components/DashboardPage/LatestNews";
 import useStockNews from "@/CustomHooks/useStockNews";
 
@@ -17,26 +17,40 @@ function Dashboard() {
   const { data, isLoadingChart } = useStockHistory();
   const { candleStickData, HistoryLoader, currentBtn, handleCheckHistory } =
     useStockPeriod("^IXIC");
-  const { PositiveGain, NegativeGain, positiveLoading, negativeLoading } =
-    useTopCategories();
+
   //   const { newsData, newsLoadingData } = useLatestNews();
   const { data: newsData, isLoading: newsLoadingData } = useStockNews();
+  const mockGainers = [
+    { symbol: "NVDA", price: 875.4, changesPercentage: 8.24 },
+    { symbol: "META", price: 512.3, changesPercentage: 5.67 },
+    { symbol: "AMD", price: 178.2, changesPercentage: 4.91 },
+    { symbol: "TSLA", price: 245.8, changesPercentage: 4.35 },
+    { symbol: "MSFT", price: 415.6, changesPercentage: 3.78 },
+    { symbol: "AAPL", price: 189.9, changesPercentage: 3.12 },
+    { symbol: "GOOGL", price: 175.4, changesPercentage: 2.89 },
+    { symbol: "AMZN", price: 198.7, changesPercentage: 2.54 },
+    { symbol: "NFLX", price: 632.1, changesPercentage: 2.31 },
+    { symbol: "CRM", price: 298.5, changesPercentage: 1.98 },
+  ];
 
-  //   if (newsLoadingData) {
-  //     return <loader />;
-  //   }
+  const mockLosers = [
+    { symbol: "INTC", price: 42.3, changesPercentage: -6.84 },
+    { symbol: "PYPL", price: 63.2, changesPercentage: -5.21 },
+    { symbol: "SNAP", price: 11.4, changesPercentage: -4.67 },
+    { symbol: "UBER", price: 71.8, changesPercentage: -3.92 },
+    { symbol: "LYFT", price: 14.2, changesPercentage: -3.45 },
+    { symbol: "SPOT", price: 312.4, changesPercentage: -2.98 },
+    { symbol: "HOOD", price: 18.6, changesPercentage: -2.67 },
+    { symbol: "COIN", price: 198.3, changesPercentage: -2.34 },
+    { symbol: "RBLX", price: 38.9, changesPercentage: -1.89 },
+    { symbol: "PLTR", price: 24.7, changesPercentage: -1.54 },
+  ];
 
-  //   if (isLoading) {
-  //     return <Loader />;
-  //   }
-
-  //   if (isLoadingChart) {
-  //     return <Loader />;
-  //   }
-
-  if (newsLoadingData || isLoading || isLoadingChart) {
+  if (newsLoadingData && isLoading && isLoadingChart) {
     return <Loader />;
   }
+
+  console.log(data);
 
   if (HistoryLoader) {
     return (
@@ -204,8 +218,7 @@ function Dashboard() {
             <Tables
               color={"text-positive"}
               increasing={true}
-              data={PositiveGain}
-              isLoading={positiveLoading}
+              data={mockGainers}
             />
           </div>
           <div className="border-2 border-dashboard-border h-fit rounded-xl -ml-1">
@@ -220,8 +233,7 @@ function Dashboard() {
             <Tables
               color={"text-negative"}
               increasing={false}
-              data={NegativeGain}
-              isLoading={negativeLoading}
+              data={mockLosers}
             />
           </div>
         </div>

@@ -45,7 +45,7 @@ function SignUp() {
       // console.log(error.message);
       return;
     }
-    navigate("/dashboard");
+    navigate("/LoggedIn");
   };
 
   const handleGoogleOAuth = async () => {

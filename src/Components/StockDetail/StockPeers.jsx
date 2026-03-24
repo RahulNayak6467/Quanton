@@ -6,7 +6,7 @@ function StockPeers() {
   const { data, isLoading } = useStockPeers();
 
   if (isLoading) {
-    return <Loader />;
+    return <></>;
   }
 
   return (

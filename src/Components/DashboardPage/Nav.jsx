@@ -35,16 +35,6 @@ function Nav() {
               route={"/LoggedIn/StockDetail"}
               Icon={<ChartNoAxesCombined size={20} />}
             ></NavMenu>
-            <NavMenu
-              features={"Alerts"}
-              route={"/LoggedIn/Alerts"}
-              Icon={<Bell size={20} />}
-            ></NavMenu>
-            <NavMenu
-              features={"Discover"}
-              route={"/LoggedIn/Discover"}
-              Icon={<Search size={20} />}
-            ></NavMenu>
           </ul>
         </div>
         <div>

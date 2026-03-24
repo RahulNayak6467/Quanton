@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSearchContext } from "@/Context/StockSearch";
 import useStockInfo from "@/CustomHooks/useStockInfo";
 import WatchListStar from "../WatchList.jsx/WatchListStar";
-import useWatchList from "@/CustomHooks/CustomSupabaseHooks/useWatchList";
+import useWatchList from "@/CustomHooks/useWatchList";
 import { supabase } from "@/Supabase-client/SupabaseClient";
 
 function StockName() {
@@ -14,9 +14,10 @@ function StockName() {
 
   if (isLoading || watchListLoading) {
     return (
-      <div className="flex items-center justify-center">
-        <div className="w-6 h-6 border-2 border-[#30363D] border-t-green-500 rounded-full animate-spin" />
-      </div>
+      //   <div className="flex items-center justify-center">
+      //     <div className="w-6 h-6 border-2 border-[#30363D] border-t-green-500 rounded-full animate-spin" />
+      //   </div>
+      <></>
     );
   }
 

@@ -12,7 +12,7 @@ function StockNews() {
   const { data: newsData, isLoading: newsLoadingData } = useStockNews();
 
   if (newsLoadingData) {
-    return <Loader />;
+    return <></>;
   }
 
   return (
