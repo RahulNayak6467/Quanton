@@ -11,7 +11,7 @@ function StockInfo() {
   // console.log(StockInfoData);
 
   return (
-    <div className="border border-dashboard-border rounded-md bg-dashboard-card  p-5 w-100 flex flex-col gap-4">
+    <div className="border border-dashboard-border rounded-md bg-dashboard-card p-5 w-full xl:w-100 shrink-0 flex flex-col gap-4 min-w-0">
       {/* Price Stats */}
       <h1 className="text-accent text-xl font-bold">Financials</h1>
       <div className="flex flex-col gap-2">

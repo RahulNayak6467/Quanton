@@ -24,13 +24,13 @@ function WatchListPage() {
 
   return (
     <>
-      <div className="border-dashboard-border border bg-dashboard-card flex items-center justify-between w-[90%] rounded-full mx-auto py-3">
-        <h1 className="text-text-primary text-2xl font-sans font-bold ml-20">
+      <div className="border-dashboard-border border bg-dashboard-card flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between w-full max-w-4xl rounded-2xl sm:rounded-full mx-auto py-3 px-4 sm:px-6">
+        <h1 className="text-text-primary text-xl sm:text-2xl font-sans font-bold text-center sm:text-left sm:ml-4 lg:ml-8">
           My WatchList
         </h1>
         <button
           onClick={openModal}
-          className="p-2 px-4 bg-accent text-text-primary rounded-2xl mr-20 cursor-pointer hover:bg-accent-hover transition-all"
+          className="p-2 px-4 bg-accent text-text-primary rounded-2xl sm:mr-4 lg:mr-8 cursor-pointer hover:bg-accent-hover transition-all w-full sm:w-auto shrink-0"
         >
           Add Stock
         </button>

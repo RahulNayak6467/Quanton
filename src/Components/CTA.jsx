@@ -23,7 +23,7 @@ function CTA() {
             Start Today
           </span>
 
-          <h2 className="text-5xl text-text-primary font-semibold mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl text-text-primary font-semibold mb-4">
             The Market Waits <span className="text-accent">for No One.</span>
           </h2>
 

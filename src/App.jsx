@@ -95,7 +95,7 @@ function App(props) {
           path: "StockDetail",
           element: (
             <SearchContextProvider>
-              <StockDetail />,
+              <StockDetail />
             </SearchContextProvider>
           ),
         },

@@ -46,11 +46,15 @@ function Dashboard() {
     { symbol: "PLTR", price: 24.7, changesPercentage: -1.54 },
   ];
 
-  if (newsLoadingData && isLoading && isLoadingChart) {
+  if (newsLoadingData || isLoading || isLoadingChart) {
     return <Loader />;
   }
 
   console.log(data);
+
+  if (!stockData?.length || !data?.length) {
+    return <Loader />;
+  }
 
   if (HistoryLoader) {
     return (
@@ -63,7 +67,7 @@ function Dashboard() {
 
   return (
     <section className="py-6 pb-50">
-      <div className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 px-20 ">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 px-4 sm:px-8 lg:px-20 ">
         <MiniChart
           stockData={stockData[0][0]}
           data={data[0]}
@@ -97,24 +101,24 @@ function Dashboard() {
           heightBar={60}
         />
       </div>
-      <div className="grid grid-cols-20 px-20 gap-7 mt-5">
-        <div className="col-span-15 grid-cols-1 gap-y-4">
-          <div className="border-2 border-dashboard-border  bg-dashboard-card  rounded-2xl -mr-0.5 p-2">
+      <div className="grid grid-cols-1 xl:grid-cols-12 px-4 sm:px-8 lg:px-20 gap-7 mt-5">
+        <div className="xl:col-span-9 grid-cols-1 gap-y-4 min-w-0">
+          <div className="border-2 border-dashboard-border  bg-dashboard-card  rounded-2xl xl:-mr-0.5 p-2">
             <div>
-              <div className="flex justify-between items-center  p-4">
-                <div className="flex gap-4 items-center">
-                  <h1 className="font-extrabold text-4xl px-1 py-0.5 text-text-secondary">
+              <div className="flex flex-col gap-4 xl:flex-row xl:justify-between xl:items-center p-3 sm:p-4">
+                <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4 min-w-0">
+                  <h1 className="font-extrabold text-2xl sm:text-4xl px-1 py-0.5 text-text-secondary break-words">
                     {stockData[1][0]?.name}
                   </h1>
-                  <span className="text-xl text-text-secondary">
+                  <span className="text-lg sm:text-xl text-text-secondary shrink-0">
                     {stockData[1][0]?.price?.toFixed(2)}
                   </span>
-                  <div className="flex gap-2 items-center">
+                  <div className="flex gap-2 items-center shrink-0">
                     <span
                       className={
                         stockData[1][0]?.changePercentage?.toFixed(2) > 0
-                          ? "text-xl text-positive"
-                          : "text-xl text-negative"
+                          ? "text-lg sm:text-xl text-positive"
+                          : "text-lg sm:text-xl text-negative"
                       }
                     >
                       {stockData[1][0]?.changePercentage?.toFixed(2)}%
@@ -126,7 +130,7 @@ function Dashboard() {
                     )}
                   </div>
                 </div>
-                <div className="border border-bg-elevated  flex gap-2 rounded-md">
+                <div className="border border-bg-elevated flex flex-wrap gap-1 rounded-md w-full xl:w-auto">
                   <button
                     onClick={() => handleCheckHistory(1, 1)}
                     className={
@@ -205,8 +209,8 @@ function Dashboard() {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-1 gap-y-4 col-span-5">
-          <div className="border-2 border-dashboard-border h-fit rounded-xl -ml-1">
+        <div className="grid grid-cols-1 gap-y-4 xl:col-span-3 min-w-0">
+          <div className="border-2 border-dashboard-border h-fit rounded-xl xl:-ml-1">
             <div className="p-6 flex items-center justify-between  bg-dashboard-card rounded-2xl">
               <h1 className="uppercase text-xl font-bold text-left text-positive">
                 Top Gainers
@@ -215,13 +219,15 @@ function Dashboard() {
                 <span className="text-positive">●</span> Market Open{" "}
               </p>
             </div>
-            <Tables
-              color={"text-positive"}
-              increasing={true}
-              data={mockGainers}
-            />
+            <div className="overflow-x-auto rounded-b-2xl">
+              <Tables
+                color={"text-positive"}
+                increasing={true}
+                data={mockGainers}
+              />
+            </div>
           </div>
-          <div className="border-2 border-dashboard-border h-fit rounded-xl -ml-1">
+          <div className="border-2 border-dashboard-border h-fit rounded-xl xl:-ml-1">
             <div className="p-6 flex items-center justify-between bg-dashboard-card rounded-2xl">
               <h1 className="uppercase text-xl font-bold text-left text-negative ">
                 Top losers
@@ -230,11 +236,13 @@ function Dashboard() {
                 <span className="text-positive">●</span> Market Open{" "}
               </p>
             </div>
-            <Tables
-              color={"text-negative"}
-              increasing={false}
-              data={mockLosers}
-            />
+            <div className="overflow-x-auto rounded-b-2xl">
+              <Tables
+                color={"text-negative"}
+                increasing={false}
+                data={mockLosers}
+              />
+            </div>
           </div>
         </div>
       </div>

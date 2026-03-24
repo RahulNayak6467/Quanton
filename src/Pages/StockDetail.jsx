@@ -31,7 +31,6 @@ function StockDetail() {
       if (e.key === "Enter") {
         handleDebouncedQuery(searchQuery);
         handleIsOpen(false);
-        // handleSearchQuery(null);
         searchRef.current.blur();
       }
     };
@@ -84,13 +83,20 @@ function StockDetail() {
 
   // console.log(suggestionsLoading);
 
+  const searchInputBase =
+    "outline-none text-lg text-text-disabled h-12 w-full pl-12 pr-12 bg-dashboard-card cursor-pointer z-[999]";
+  const searchInputClosed = `${searchInputBase} focus:ring-2 focus:ring-dashboard-card border-[#30303D] border-2 focus:border-dashboard-page rounded-full`;
+  const searchInputOpen = `${searchInputBase} rounded-none rounded-b-2xl`;
+
   return (
-    <section className="pb-20">
-      <div className="flex justify-center items-center h-15 relative">
-        <Search
-          size={20}
-          className="text-text-disabled text-center absolute left-[30%] top-[45%] cursor-pointer hover:text-text-primary "
-        />
+    <section className="pb-20 px-4 sm:px-6 overflow-x-hidden">
+      <div className="relative w-full max-w-3xl mx-auto mt-4 isolate">
+        <span
+          className="pointer-events-none absolute inset-y-0 left-0 z-10 flex w-12 items-center justify-center text-text-disabled"
+          aria-hidden
+        >
+          <Search size={20} strokeWidth={2} className="shrink-0" />
+        </span>
         <input
           ref={searchRef}
           onClick={() => {
@@ -100,24 +106,19 @@ function StockDetail() {
           value={searchQuery}
           type="text"
           placeholder="Enter your favourite stock by company name or symbol..."
-          className={
-            isOpen
-              ? "outline-none  text-lg text-text-disabled mt-4  h-full  mx-auto w-200  px-2 bg-dashboard-card pl-12   cursor-pointer z-999"
-              : " outline-none focus:ring-2 focus:ring-dashboard-card text-lg text-text-disabled mt-4 border-[#30303D]  h-full  mx-auto w-200 border-2 px-2 bg-dashboard-card focus:border-dashboard-page pl-12 rounded-full  cursor-pointer"
-          }
+          className={isOpen ? searchInputOpen : searchInputClosed}
         />
-        <X
-          size={20}
+        <button
+          type="button"
           onClick={() => {
             if (isOpen) handleIsOpen(false);
             handleSearchQuery("");
           }}
-          className={
-            isOpen
-              ? "text-text-disabled absolute right-[30%] top-[45%] cursor-pointer hover:text-text-primary z-999"
-              : "text-text-disabled absolute right-[30%] top-[45%] cursor-pointer hover:text-text-primary"
-          }
-        />
+          className="absolute inset-y-0 right-0 z-[999] flex w-12 items-center justify-center text-text-disabled hover:text-text-primary"
+          aria-label="Clear search"
+        >
+          <X size={20} strokeWidth={2} className="shrink-0" />
+        </button>
       </div>
 
       {isOpen ? (
@@ -126,8 +127,8 @@ function StockDetail() {
         ""
       )}
       {isOpen ? (
-        <div className="flex relative justify-center z-999 rounded-full">
-          <div className="w-200  rounded-b-2xl mx-auto  border-t-0 border-[#30303D] bg-dashboard-card overflow-hidden">
+        <div className="relative z-[999] w-full max-w-3xl mx-auto -mt-4">
+          <div className="w-full rounded-b-2xl border-t-0 border-[#30303D] bg-dashboard-card overflow-hidden border border-[#30303D]">
             {suggestionsData?.length === 0 ? (
               <p className="text-[#8B949E] text-sm px-4 py-3">
                 No results found.
@@ -158,17 +159,17 @@ function StockDetail() {
         ""
       )}
 
-      <div className="flex  mt-10 gap-8 w-[90%] mx-auto">
+      <div className="flex flex-col lg:flex-row mt-10 gap-8 w-full max-w-[1400px] mx-auto">
         <StockName />
         <StockPeers />
       </div>
 
-      <div className="flex w-[90%] gap-8 mx-auto mt-10">
+      <div className="flex flex-col xl:flex-row w-full max-w-[1400px] gap-8 mx-auto mt-10 min-w-0">
         <StockDisplayChart />
         <StockInfo />
       </div>
 
-      <div className="flex w-[90%] gap-8 mx-auto mt-10">
+      <div className="flex flex-col lg:flex-row w-full max-w-[1400px] gap-8 mx-auto mt-10 min-w-0">
         <StockNews />
         <StockProfile />
       </div>

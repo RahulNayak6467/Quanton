@@ -3,8 +3,8 @@ import TestimonialsList from "./TestimonialsList";
 
 function Testimonials() {
   return (
-    <section className="py-24 overflow-x-hidden">
-      <h1 className="text-5xl text-text-primary text-center mb-12">
+    <section className="py-24 overflow-x-hidden px-4 sm:px-6">
+      <h1 className="text-3xl sm:text-4xl md:text-5xl text-text-primary text-center mb-12">
         See What <span className="text-accent">People</span> Think About Our{" "}
         <span className="text-accent">Services</span>
       </h1>

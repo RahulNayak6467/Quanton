@@ -79,9 +79,9 @@ function SignUp() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="rounded-2xl flex justify-center w-160 items-center min-h-screen mx-auto "
+      className="rounded-2xl flex justify-center w-full max-w-lg px-4 items-center min-h-screen mx-auto"
     >
-      <div className="rounded-2xl flex-col  border-bg-card border-2 w-[80%] p-6">
+      <div className="rounded-2xl flex-col border-bg-card border-2 w-full p-6">
         <div className="mb-4">
           <h1 className=" text-center text-3xl text-accent mb-3">Quanton</h1>
           <p className="text-text-secondary text-[15px] text-center">

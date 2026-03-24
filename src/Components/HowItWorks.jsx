@@ -25,13 +25,13 @@ function HowItWorks() {
   const div3Ref = useRef(null);
 
   return (
-    <section className="pt-24 max-w-7xl mx-auto px-6">
+    <section className="pt-24 max-w-7xl mx-auto px-4 sm:px-6">
       {/* Heading */}
       <div className="text-center mb-16">
         <span className="px-3 py-1 rounded-full border border-border text-text-secondary text-sm mb-4 inline-block">
           How It Works
         </span>
-        <h2 className="text-4xl text-text-primary font-semibold mb-4">
+        <h2 className="text-3xl sm:text-4xl text-text-primary font-semibold mb-4">
           Up and Running in <span className="text-accent">Minutes.</span>
         </h2>
         <p className="text-text-secondary text-lg max-w-xl mx-auto leading-relaxed">
@@ -45,7 +45,7 @@ function HowItWorks() {
         ref={containerRef}
       >
         <div className="flex size-full flex-col items-stretch justify-between gap-10">
-          <div className="flex flex-row justify-between">
+          <div className="flex flex-col items-center gap-10 md:flex-row md:justify-between md:items-start md:gap-4">
             <div>
               <Circle ref={div1Ref}>
                 <HowItWorksList step={steps[0]} />

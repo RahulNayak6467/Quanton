@@ -3,7 +3,7 @@ import StockChart from "../Charts/LightWeightCharts";
 import { TrendingUp, TrendingDown } from "lucide-react";
 function MiniChart({ stockData, data, colors }) {
   return (
-    <div className="flex justify-between  p-6 py-3 border-2 items-center w-full h-30 rounded-xl mx-auto  bg-dashboard-card border-dashboard-border">
+    <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0 p-4 sm:p-6 py-3 border-2 items-stretch sm:items-center w-full sm:h-30 rounded-xl mx-auto bg-dashboard-card border-dashboard-border">
       <div>
         <h3 className="text-text-primary text-md font-bold">
           {stockData?.name}

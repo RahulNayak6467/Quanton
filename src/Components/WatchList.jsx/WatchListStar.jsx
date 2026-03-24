@@ -1,12 +1,12 @@
 import { Star } from "lucide-react";
 
-function WatchListStar({ size, isInList }) {
+function WatchListStar({ size, isInList, isInWatchList, setIsInWatchList }) {
   return (
-    <div>
+    <div onClick={() => setIsInWatchList(!isInWatchList)}>
       <Star
         size={size}
         className={
-          isInList
+          isInList || isInWatchList
             ? "fill-yellow-400 cursor-pointer"
             : "text-yellow-400 cursor-pointer"
         }

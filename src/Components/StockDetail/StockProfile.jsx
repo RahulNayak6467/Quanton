@@ -9,7 +9,7 @@ function StockProfile() {
   const stockData = StockInfoData[1][0];
 
   return (
-    <div className="flex-col w-[30%]  border border-dashboard-border p-6 rounded-md bg-dashboard-card">
+    <div className="flex flex-col w-full lg:w-[30%] border border-dashboard-border p-6 rounded-md bg-dashboard-card min-w-0 shrink-0">
       <div>
         <h1 className="text-xl text-accent">Profile</h1>
       </div>

@@ -9,19 +9,14 @@ function StockName() {
   const { data: StockInfoData, isLoading } = useStockInfo();
   const { debouncedQuery } = useSearchContext();
 
-  //   const [isInWatchList, setIsInWatchList] = useState(false);
+  const [isInWatchList, setIsInWatchList] = useState(false);
   const { data: watchlistData, isLoading: watchListLoading } = useWatchList();
 
   if (isLoading || watchListLoading) {
-    return (
-      //   <div className="flex items-center justify-center">
-      //     <div className="w-6 h-6 border-2 border-[#30363D] border-t-green-500 rounded-full animate-spin" />
-      //   </div>
-      <></>
-    );
+    return <></>;
   }
-
-  const stockSymbol = Object.keys(watchlistData);
+  console.log(watchlistData);
+  const stockSymbol = Object.values(watchlistData);
   const stockData = StockInfoData[1][0];
 
   const ipoDate = new Date(stockData?.ipoDate).toLocaleDateString("en-US", {
@@ -30,8 +25,10 @@ function StockName() {
     day: "numeric",
   });
   // → "Dec 12, 1980"
-
-  const checkWatchList = stockSymbol.some((el) => el === debouncedQuery);
+  console.log(stockSymbol);
+  console.log(debouncedQuery);
+  const checkWatchList = stockSymbol.some((el) => el.ticker === debouncedQuery);
+  console.log(checkWatchList);
 
   const addStockDataWatchList = async (symbol) => {
     if (stockSymbol.some((el) => el === symbol)) {
@@ -58,13 +55,11 @@ function StockName() {
       throw new Error("An error occured");
     }
 
-    console.log(data);
-
     return data;
   };
 
   return (
-    <div className="border-2 border-dashboard-border bg-dashboard-card  p-6  w-[35%] rounded-md  ">
+    <div className="border-2 border-dashboard-border bg-dashboard-card p-6 w-full lg:w-[35%] shrink-0 rounded-md min-w-0">
       {/* // <div className="border-2 border-dashboard-border p-6 mt-10 w rounded-md w-[90%] mx-auto "> */}
       <div className="flex justify-between items-center">
         <div className="flex gap-4 items-center">
@@ -105,11 +100,16 @@ function StockName() {
             (as of 00:17 GMT+5:30){" "}
           </p>
           <div onClick={() => addStockDataWatchList(stockData?.symbol)}>
-            <WatchListStar size={18} isInList={checkWatchList} />
+            <WatchListStar
+              size={18}
+              isInList={checkWatchList}
+              isInWatchList={isInWatchList}
+              setIsInWatchList={setIsInWatchList}
+            />
           </div>
         </div>
       </div>
-      <div className="flex gap-4 mt-4">
+      <div className="flex flex-wrap gap-4 mt-4">
         <div className="flex-col">
           <p className="text-text-secondary text-md">{ipoDate}</p>
           <p className="uppercase text-text-disabled text-xs">IPO Date</p>

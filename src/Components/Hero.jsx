@@ -4,8 +4,8 @@ function Hero({ props, data }) {
   // function TypewriterEffectDemo() {
 
   return (
-    <div className="flex max-w-[1360px] mx-auto gap-4 items-center">
-      <section className="relative max-w-7xl mx-auto flex-col gap-4 py-24">
+    <div className="flex flex-col xl:flex-row max-w-[1360px] mx-auto gap-8 xl:gap-4 items-stretch xl:items-center px-4 sm:px-6">
+      <section className="relative max-w-7xl mx-auto flex flex-col gap-4 py-12 sm:py-24 w-full min-w-0">
         {/* Glow 1 - behind headline */}
         <div
           className="absolute pointer-events-none"
@@ -46,10 +46,10 @@ function Hero({ props, data }) {
 
           {/* Headline */}
           <div className="mb-8">
-            <h1 className="text-7xl text-text-primary font-semibold leading-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-text-primary font-semibold leading-tight">
               The <span className="text-accent">Market</span> Moves Fast.
             </h1>
-            <h1 className="text-7xl text-text-primary font-semibold leading-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-text-primary font-semibold leading-tight">
               So Should <span className="text-accent">You.</span>
             </h1>
           </div>
@@ -64,7 +64,7 @@ function Hero({ props, data }) {
           </div>
 
           {/* Buttons */}
-          <div className="mb-6 flex gap-4 items-center">
+          <div className="mb-6 flex flex-col sm:flex-row gap-4 items-stretch sm:items-center">
             <button className="px-6 py-3 cursor-pointer rounded-2xl bg-accent hover:bg-accent-hover text-white flex items-center gap-2 shadow-[0_5px_30px_rgba(16,185,129,0.4)] transition-all">
               Start Tracking Free
             </button>
@@ -75,7 +75,7 @@ function Hero({ props, data }) {
 
           {/* Trust line */}
           <div>
-            <ul className="flex gap-4 list-disc ml-3">
+            <ul className="flex flex-col sm:flex-row sm:flex-wrap gap-2 sm:gap-4 list-disc ml-3">
               <li className="text-text-disabled text-sm">
                 No credit card required
               </li>
@@ -91,7 +91,7 @@ function Hero({ props, data }) {
         </div>*/}
       </section>
       {/* Right side - chart */}
-      <div className="flex-1 rounded-2xl border-2  border-accent shadow-[0_5px_30px_rgba(16,185,129,0.4)] p-1">
+      <div className="flex-1 min-w-0 w-full rounded-2xl border-2 border-accent shadow-[0_5px_30px_rgba(16,185,129,0.4)] p-1">
         <StockChart {...props} data={data} />
       </div>
     </div>

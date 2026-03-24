@@ -2,7 +2,7 @@ import { steps } from "@/Data/Steps";
 
 function HowIt() {
   return (
-    <div className="grid grid-cols-3 w-full max-w-[1150px] mx-auto justify-center  mb-20">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4 w-full max-w-[1150px] mx-auto justify-center px-4 sm:px-6 mb-20">
       <div>
         <h3 className="text-text-primary text-center   font-semibold text-lg mb-2 ">
           {steps[0].title}

@@ -44,7 +44,7 @@ function WatchListTable() {
   };
 
   return (
-    <Table className="w-7xl mx-auto text-text-primary">
+    <Table className="w-full min-w-[560px] md:min-w-0 mx-auto text-text-primary">
       <TableHeader>
         <TableRow>
           <TableHead>Logo</TableHead>

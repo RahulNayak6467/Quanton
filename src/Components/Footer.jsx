@@ -4,9 +4,9 @@ function Footer() {
     <footer className="border-t border-border py-6 px-6">
       <div className="max-w-7xl mx-auto">
         {/* Top row */}
-        <div className="flex justify-between items-start mb-6">
+        <div className="flex flex-col lg:flex-row justify-between items-start gap-10 mb-6">
           {/* Brand */}
-          <div className="max-w-xs">
+          <div className="max-w-xs w-full">
             <div className="flex items-center gap-2 mb-3">
               <div className=" rounded-full bg-accent flex items-center justify-center  font-bold text-sm">
                 <CircleDollarSign
@@ -25,7 +25,7 @@ function Footer() {
           </div>
 
           {/* Links */}
-          <div className="flex gap-16">
+          <div className="flex flex-col sm:flex-row gap-10 sm:gap-16 w-full lg:w-auto">
             <div>
               <h4 className="text-text-primary font-semibold mb-4">Product</h4>
               <ul className="flex flex-col gap-2">
@@ -135,11 +135,11 @@ function Footer() {
         </div>
 
         {/* Bottom row */}
-        <div className="border-t border-border pt-6 flex justify-between items-center">
+        <div className="border-t border-border pt-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <p className="text-text-disabled text-sm">
             © 2025 Quanton. All rights reserved.
           </p>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4">
             <a
               href="#"
               className="text-text-secondary hover:text-text-primary transition-colors text-sm"

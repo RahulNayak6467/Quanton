@@ -3,10 +3,10 @@ import FeaturesList from "./FeaturesList";
 
 function Features() {
   return (
-    <section className="max-w-330 mx-auto mt-24 mb-24">
-      <div className="text-center mb-12 p-6">
+    <section className="max-w-330 mx-auto mt-24 mb-24 px-4 sm:px-6">
+      <div className="text-center mb-12 p-4 sm:p-6">
         {/* Heading */}
-        <h2 className="text-5xl text-text-primary font-semibold mb-4">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl text-text-primary font-semibold mb-4">
           Everything You Need.{" "}
           <span className="text-accent">Nothing You Don't.</span>
         </h2>
