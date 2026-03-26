@@ -10,9 +10,18 @@ import { Link } from "react-router-dom";
 import NavMenu from "../NavMenu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useState } from "react";
+import { supabase } from "@/Supabase-client/SupabaseClient";
 
 function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const userLogOut = async () => {
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+      throw new Error("Please try again");
+    }
+  };
 
   return (
     <header className="p-3 mb-2 backdrop-blur-3xl">
@@ -76,6 +85,12 @@ function Nav() {
             <p className="text-text-secondary text-md font-bold truncate min-w-0">
               Rahul Nayak
             </p>
+            <button
+              onClick={() => userLogOut()}
+              className="text-red-500  bg-bg-elevated px-4 py-2 cursor-pointer hover:bg-bg-page rounded-2xl"
+            >
+              Logout
+            </button>
           </div>
         </div>
       </nav>

@@ -81,8 +81,6 @@ function StockDetail() {
 
   console.log(suggestionsData);
 
-  // console.log(suggestionsLoading);
-
   const searchInputBase =
     "outline-none text-lg text-text-disabled h-12 w-full pl-12 pr-12 bg-dashboard-card cursor-pointer z-[999]";
   const searchInputClosed = `${searchInputBase} focus:ring-2 focus:ring-dashboard-card border-[#30303D] border-2 focus:border-dashboard-page rounded-full`;
